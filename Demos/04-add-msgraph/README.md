@@ -27,6 +27,7 @@ To complete this lab, you need the following:
         1. In the **Choose options for your new file** dialog, set the following values, select **Next** and then select **Create**:
             * **Class**: CalendarTableViewController
             * **Subclass of**: UITableViewController
+            * **Also create XIB file**: unselected
             * **Language**: Objective-C
     1. Open the **CalendarTableViewController.h** file.
         1. Add the following code to the `CalendarTableViewController` interface:
@@ -37,7 +38,7 @@ To complete this lab, you need the following:
 
 1. Associate the calendar events view with it's new controller:
     1. In the **Navigator** panel, select **Main.storyboard**.
-    1. In the storyboard designer, select the **Root View Controller**
+    1. In the storyboard designer, select the **Root View Controller Scene > Root View Controller**
         1. In the **Utilities** panel, within the **Identity** inspector, set the **Class** to **CalendarTableViewController**.
 
             ![Screenshot associating the calendar view to the controller](../../Images/xcode-graph-01.png)
@@ -48,7 +49,7 @@ To complete this lab, you need the following:
 
     1. In the storyboard designer, select the **CalendarList Scene > CalendarList > Table View > Table View Cell**.
         1. In the **Utilities** panel, within the **Identity** inspector, set the **Document > Label** to **calendarListCell**.
-        1. In the **Utilities** panel, within the **Attributes** inspector, set the **Document > Label** to **eventCellTableViewCell**.
+        1. In the **Utilities** panel, within the **Attributes** inspector, set the **Tabel View Cell > Identifier** to **eventCellTableViewCell**.
 
 1. Implement the user interface for the table cells that will display events.
     1. In the **Utilities** panel, drag two **Label** controls from the **Object** library into the white box for the table view cell.
@@ -139,7 +140,7 @@ To complete this lab, you need the following:
         }
         ```
 
-    1. Add the following two utility methods to the `CalendarTableViewController` class:
+    1. Add the following three utility methods to the `CalendarTableViewController` class:
 
         ```objc
         - (UIImage *)imageWithColor:(UIColor *)color {
@@ -245,21 +246,51 @@ To complete this lab, you need the following:
         }
         ```
 
-1. Update the login controller so after a successful login, it will programatically load the calendar event view:
+1. Update the login controller so after a successful login, it will programmatically load the calendar event view:
     1. In the **Navigator**, select the **LoginViewController.m**
     1. Locate the `loginAction()` method in the `LoginViewController` class.
-    1. Add the following lines to the end of the method:
+    1. Within the `loginAction()` method, locate the following `else` statement:
 
         ```objc
-        UIStoryboard *board = [UIStoryboard storyboardWithName:@"Main" bundle:NSBundle.mainBundle];
-        UIViewController *calVC = [board instantiateViewControllerWithIdentifier:@"calendarList"];
-        [self.navigationController pushViewController:calVC animated:YES];
+        ..
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showLoadingUI:NO];
+                MSALUser *currentUser = [authenticationManager user];
+
+                NSString *successMessage = @"Authentication succeeded for: ";
+                successMessage = [successMessage stringByAppendingString:[currentUser name]];
+                successMessage = [successMessage stringByAppendingString:@" ("];
+                successMessage = [successMessage stringByAppendingString:[currentUser displayableId]];
+                successMessage = [successMessage stringByAppendingString:@")"];
+
+                [self showMessage:successMessage withTitle:@"Success"];
+            });
+        }
+        ```
+
+    1. Replace the body of the `dispatch_async()` method with code that will update the login view and navigate to the **calendarList** view:
+
+        ```objc
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showLoadingUI:NO];
+                self.loginButton.enabled = NO;
+                self.logoutButton.enabled = YES;
+
+                UIStoryboard *board = [UIStoryboard storyboardWithName:@"Main" bundle:NSBundle.mainBundle];
+                UIViewController *calVC = [board instantiateViewControllerWithIdentifier:@"calendarList"];
+                [self.navigationController pushViewController:calVC animated:YES];
+            });
+        }
         ```
 
 1. Test the user interface:
     1. Select the play button in the toolbar to build & run the application in the iPhone simulator.
     1. When the application loads in the simulator, select **Signin with Microsoft**.
     1. When prompted, signin using your Office 365 account:
-    1. After a successful signin, you should see an alert box appear with your name.
+    1. After a successful signin, the app will navigate to the view that displays events from your calendar:
 
         ![Screenshot of the iOS prompting the user to login](../../Images/xcode-graph-03.png)
+
+    1. Select the **Back** link at the top of the screen to go back to the login view where you can optionally signout.

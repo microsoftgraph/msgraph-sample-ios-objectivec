@@ -23,9 +23,12 @@ To complete this lab, you need the following:
 
 1. Use the package manager Carthage to add the MSAL for iOS library to the application:
     1. In XCode, select **File > New File**
-    1. Select **Empty File** and select **Next**.
-    1. Name the file **Carthage** and select **Create**. Make sure to save the file in the same folder as the **NativeO365CalendarEvents.xcodeproj** file.
-    1. Add the following to the **Carthage** file:
+    1. Select **Empty** and select **Next**.
+    1. Name the file **Cartfile** and select **Create**. Make sure to save the file in the same folder as the **NativeO365CalendarEvents.xcodeproj** file.
+
+        >Note: It's likely the default location XCode wants to save the file is not where it should go. Make sure to create the file in the same directory as the `*.xcodeproj` file or a future step in the lab will not work.
+
+    1. Add the following to the **Cartfile** file:
 
         ```txt
         github "AzureAD/microsoft-authentication-library-for-objc" "master"
@@ -42,22 +45,22 @@ To complete this lab, you need the following:
         1. In the **Navigator**, select the project.
         1. In the **General** section of the project's properties, select the plus control in the **Linked Frameworks and Libraries** section.
 
-            ![Screenshot of the project's Linked Frameworks and Libraries](./Images/xcode-auth-01.png)
+            ![Screenshot of the project's Linked Frameworks and Libraries](../../Images/xcode-auth-01.png)
 
         1. In the **Choose frameworks and libraries to add**, select **Add Other**.
         1. Select the **MSAL.Framework** folder from **./Carthage/Build/iOS** folder.
 
-            ![Screenshot of the project's Linked Frameworks and Libraries](./Images/xcode-auth-02.png)
+            ![Screenshot of the project's Linked Frameworks and Libraries](../../Images/xcode-auth-02.png)
 
-    1. In the **Build Phases** section of the project's properties, select the **TARGETS > NativeO365CalendarEvents**.
+    1. In the **Build Phases** section of the project's properties, select the **TARGETS > NativeO365CalendarEvents** from the left side panel.
         1. Select the plus icon in the top-left corner and select **New Run Script Phase**.
 
-            ![Screenshot of creating a new build script phase](./Images/xcode-auth-03.png)
+            ![Screenshot of creating a new build script phase](../../Images/xcode-auth-03.png)
 
         1. Set the shell script to run:
 
             ```bash
-            usr/local/bin/carthage copy-frameworks
+            /usr/local/bin/carthage copy-frameworks
             ```
 
         1. Set the following **Input Files**:
@@ -66,7 +69,7 @@ To complete this lab, you need the following:
             $(SRCROOT)/Carthage/Build/iOS/MSAL.framework
             ```
 
-            ![Screenshot adding the run script details](./Images/xcode-auth-04.png)
+            ![Screenshot adding the run script details](../../Images/xcode-auth-04.png)
 
 1. Update the application's configuration to include the Azure AD application's ID:
     1. In the **Navigator**, right-click the **Info.plist** file and select **Open As > Source Code**.
@@ -91,12 +94,14 @@ To complete this lab, you need the following:
 
     1. In the previous XML, replace the `ENTER_YOUR_CLIENT_ID` with the Azure AD application's ID you copied from a previous step.
 
+        >Note: Be sure to leave the `msal` as the prefix before the Azure AD application's ID so it looks similar to this: `<string>msale1d082fe-32d3-4adb-a0ec-3a2183f4866d</string>`
+
 1. Update the application to handle a response from the MSAL library:
     1. In the **Navigator**, select the **AppDelegate.m** file.
     1. Add the following `import` statement after the existing ones:
 
         ```objc
-        #import <MSAL/msal.h>
+        #import <MSAL/MSAL.h>
         ```
 
     1. Add the following method to the end of the file, before the closing `@end` statement.
@@ -122,10 +127,10 @@ To complete this lab, you need the following:
     1. Add the following `import` statement after the existing ones:
 
         ```objc
-        #import <MSAL/msal.h>
+        #import <MSAL/MSAL.h>
         ```
 
-    1. Add the following code to the body of the **AuthenticationManager** interface:
+    1. Add the following code to the body of the `AuthenticationManager` interface:
 
         ```objc
         // implement singleton pattern as a shared instance
@@ -291,16 +296,26 @@ To complete this lab, you need the following:
         }
         ```
 
+    1. Add the following code to the `AuthenticationManager` class to implement the `clearCredentials()` method:
+
+        ```obj
+        #pragma mark - clear credentials
+        - (void)clearCredentials {
+            NSError *error_ = nil;
+            [self.msalClient removeUser:self.user error:&error_];
+        }
+        ```
+
 1. Update the login controller to wire up the authentication manager:
     1. Open the **LoginViewController.m** file.
-    1. Add the following `import` statement after the existing ones:
+    1. Add the following `import` statements after the existing ones:
 
         ```objc
         #import "AuthenticationManager.h"
         #import <MSAL/MSALUser.h>
         ```
 
-    1. Add the following code after the `import` statements to declare a constant string for the root part of the Auzre AD OAuth v2 endpoints:
+    1. Add the following code after the `import` statements to declare a constant string for the root part of the Azure AD OAuth v2 endpoints:
 
         ```objc
         NSString * const kAuthority   = @"https://login.microsoftonline.com/common/v2.0";
@@ -314,48 +329,67 @@ To complete this lab, you need the following:
 
     1. Replace the contents of the `loginAction()` method with the following code to the existing `LoginViewController` class:
 
-      ```object
-      - (IBAction)loginAction:(id)sender{
-          [self showLoadingUI:YES];
+        ```objc
+        [self showLoadingUI:YES];
 
-          self.scopes = [NSArray arrayWithObjects:@"https://graph.microsoft.com/User.Read", @"https://graph.microsoft.com/Calendars.Read", nil];
+        self.scopes = [NSArray arrayWithObjects:@"https://graph.microsoft.com/User.Read", @"https://graph.microsoft.com/Calendars.Read", nil];
 
-          AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
-          [authenticationManager initWithAuthority:kAuthority completion:^(NSError *error) {
-              if (error) {
-                  [self showLoadingUI:NO];
-                  [self showMessage:@"Please see the log for more details" withTitle:@"InitWithAuthority Error"];
-              } else {
-                  [authenticationManager acquireAuthTokenWithScopes:self.scopes completion:^(MSALErrorCode error) {
-                      if(error){
-                          [self showLoadingUI:NO];
-                          [self showMessage:@"Please see the log for more details" withTitle:@"AcquireAuthToken Error"];
-                      } else {
-                          dispatch_async(dispatch_get_main_queue(), ^{
-                              MSALUser *currentUser = [authenticationManager user];
+        AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
+        [authenticationManager initWithAuthority:kAuthority completion:^(NSError *error) {
+            if (error) {
+                [self showLoadingUI:NO];
+                [self showMessage:@"Please see the log for more details" withTitle:@"InitWithAuthority Error"];
+            } else {
+                [authenticationManager acquireAuthTokenWithScopes:self.scopes completion:^(MSALErrorCode error) {
+                    if(error){
+                        [self showLoadingUI:NO];
+                        [self showMessage:@"Please see the log for more details" withTitle:@"AcquireAuthToken Error"];
 
-                              NSString *successMessage = @"Authentication succeeded for: ";
-                              successMessage = [successMessage stringByAppendingString:[currentUser name]];
-                              successMessage = [successMessage stringByAppendingString:@" ("];
-                              successMessage = [successMessage stringByAppendingString:[currentUser displayableId]];
-                              successMessage = [successMessage stringByAppendingString:@")"];
+                        self.loginButton.enabled = YES;
+                        self.logoutButton.enabled = NO;
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            MSALUser *currentUser = [authenticationManager user];
 
-                              [self showMessage:successMessage withTitle:@"Success"];
-                          });
-                      }
-                  }];
-              }
-          }];
-      }
-      ```
+                            NSString *successMessage = @"Authentication succeeded for: ";
+                            successMessage = [successMessage stringByAppendingString:[currentUser name]];
+                            successMessage = [successMessage stringByAppendingString:@" ("];
+                            successMessage = [successMessage stringByAppendingString:[currentUser displayableId]];
+                            successMessage = [successMessage stringByAppendingString:@")"];
+
+                            [self showMessage:successMessage withTitle:@"Success"];
+
+                            self.loginButton.enabled = NO;
+                            self.logoutButton.enabled = YES;
+                        });
+                    }
+                }];
+            }
+        }];
+        ```
+
+    1. Replace the contents of the `logoutAction()` method with the following code to the existing `LoginViewController` class:
+
+        ```objc
+        [self showLoadingUI:YES];
+        [self showMessage:@"Signing out of Microsoft..." withTitle:@"Signout from Microsoft"];
+
+        AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
+        [authenticationManager clearCredentials];
+
+        self.loginButton.enabled = YES;
+        self.logoutButton.enabled = NO;
+        ```
 
 1. Test the user interface:
     1. Select the play button in the toolbar to build & run the application in the iPhone simulator.
     1. When the application loads in the simulator, select **Signin with Microsoft**.
     1. When prompted, signin using your Office 365 account:
 
-        ![Screenshot of the iOS prompting the user to login](./Images/xcode-auth-05.png)
+        ![Screenshot of the iOS prompting the user to login](../../Images/xcode-auth-05.png)
 
     1. After a successful signin, you should see an alert box appear with your name.
 
-        ![Screenshot of the iOS displaying the signed in user](./Images/xcode-auth-06.png)
+        ![Screenshot of the iOS displaying the signed in user](../../Images/xcode-auth-06.png)
+
+    1. Test the signout process by selecting the **Signout with Microsoft**.

@@ -22,6 +22,8 @@
 
 - (void)acquireAuthTokenCompletion:(void (^)(MSALErrorCode *error))completion;
 
+- (void)clearCredentials;
+
 - (NSString *)getRedirectUrlFromMSALArray:(NSArray *) array;
 
 @end

@@ -32,19 +32,28 @@
         self.activityIndicator.hidden = NO;
         [self.activityIndicator startAnimating];
         [self.loginButton setTitle:@"Connecting..." forState:UIControlStateNormal];
-        self.loginButton.enabled = NO;
     }
     else{
         [self.activityIndicator stopAnimating];
         [self.loginButton setTitle:@"Signin to Office 365" forState:UIControlStateNormal];
-        self.loginButton.enabled = YES;
         self.activityIndicator.hidden = YES;
     }
+}
+
+- (IBAction)logoutAction:(id)sender{
+    [self showLoadingUI:YES];
+    [self showMessage:@"Signing out of Microsoft..." withTitle:@"Signout from Microsoft"];
+
+    self.loginButton.enabled = YES;
+    self.logoutButton.enabled = NO;
 }
 
 - (IBAction)loginAction:(id)sender{
     [self showLoadingUI:YES];
     [self showMessage:@"Launch browser based login..." withTitle:@"Signin to Office 365"];
+
+    self.loginButton.enabled = NO;
+    self.logoutButton.enabled = YES;
 }
 
 @end

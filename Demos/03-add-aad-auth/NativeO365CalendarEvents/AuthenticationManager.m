@@ -1,5 +1,5 @@
-#import <MSAL/MSAL.h>
 #import "AuthenticationManager.h"
+#import <MSAL/MSAL.h>
 
 @implementation AuthenticationManager
 
@@ -118,4 +118,12 @@
     NSString *substring = [redirectArray objectAtIndex:0];
     return substring;
 }
+
+#pragma mark - clear credentials
+//Clears the ADAL token cache and the cookie cache.
+- (void)clearCredentials {
+    NSError *error_ = nil;
+    [self.msalClient removeUser:self.user error:&error_];
+}
+
 @end

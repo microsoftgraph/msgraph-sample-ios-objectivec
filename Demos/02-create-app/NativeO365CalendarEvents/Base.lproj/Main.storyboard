@@ -67,10 +67,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Office 365 Calendar Events" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nxn-Oe-h4E">
-                                <rect key="frame" x="80" y="74" width="215" height="30"/>
+                                <rect key="frame" x="66" y="79" width="243" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kg-SU-k9r">
@@ -82,9 +82,17 @@
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qzY-tY-yqc">
-                                <rect key="frame" x="177" y="206" width="20" height="20"/>
+                                <rect key="frame" x="177" y="227" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWv-KR-Gjn">
+                                <rect key="frame" x="117" y="178" width="140" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Signout of Microsoft"/>
+                                <connections>
+                                    <action selector="logoutAction:" destination="ySn-yV-9xb" eventType="touchUpInside" id="5iX-Hx-FHG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
@@ -92,6 +100,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="qzY-tY-yqc" id="zr4-lc-TnG"/>
                         <outlet property="loginButton" destination="0kg-SU-k9r" id="QbK-Dj-Hgx"/>
+                        <outlet property="logoutButton" destination="jWv-KR-Gjn" id="ZgZ-Ym-I1j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uMl-Qy-K2o" userLabel="First Responder" sceneMemberID="firstResponder"/>

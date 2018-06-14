@@ -77,10 +77,10 @@ In this exercise you will create an iOS application and wire up the different sc
         * **Product Name**: NativeO365CalendarEvents
         * **Organization Name**: Microsoft
         * **Organization Identifier**: com.microsoft.officedev
-        * **Language**:
-        * Uncheck all additional options
+        * **Language**: Objective-C
+        * Unselect additional options
 
-        ![Screenshot of the "Choose options for your new project" dialog in XCode](./Images/xcode-createproj-01.png)
+        ![Screenshot of the "Choose options for your new project" dialog in XCode](./Images/xcode-createproj-02.png)
 
     1. Select **Next**.
 1. Cleanup the default storyboard
@@ -111,36 +111,25 @@ In this exercise you will create an iOS application and wire up the different sc
             ![Screenshot showing setting the initial view for the application](./Images/xcode-createux-03.png)
 
 1. Create the a view controller that will be used by a new view you will create:
-    1. Create a login view controller interface:
+    1. Create a login view controller:
         1. Select **File > New File**.
-        1. Select **Header File** & select **Next**.
-        1. Name the file **LoginViewController.h** & select **Create**.
-        1. Replace the contents of the file with the following code:
+        1. Select **Cocoa Touch Class** & select **Next**.
+        1. In the **Choose options for your new file** dialog, set the following values, creating the file in the project root folder (the same folder where **AppDelegate.h** is located):
+            * **Class**: LoginViewController
+            * **Subclass of**: UIViewController
+            * **Also create XIB file**: unselected
+            * **Language**: Objective-C
+        1. Open the **LoginViewController.h** file and add the following properties to the interface `LoginViewController`:
 
             ```objc
-            #import <UIKit/UIKit.h>
-            @interface LoginViewController : UIViewController
-
             @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+            @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
             @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
-            @end
             ```
 
-    1. Create a login view controller class:
-        1. Select **File > New File**.
-        1. Select **Header File** & select **Next**.
-        1. Name the file **LoginViewController**, leave the remaining options as their defaults & select **Next** followed by **Create**.
-        1. Replace the contents of the file with the following code:
+        1. Open the **LoginViewController.m** file and replace the contents of the `LoginViewController` class with the following code:
 
             ```objc
-            #import "LoginViewController.h"
-
-            @interface LoginViewController()
-            @end
-
-            @implementation LoginViewController
-
             - (void)viewDidLoad {
                 [super viewDidLoad];
                 self.activityIndicator.hidden = YES;
@@ -181,9 +170,18 @@ In this exercise you will create an iOS application and wire up the different sc
             - (IBAction)loginAction:(id)sender{
                 [self showLoadingUI:YES];
                 [self showMessage:@"Launch browser based login..." withTitle:@"Signin to Microsoft"];
+
+                self.loginButton.enabled = NO;
+                self.logoutButton.enabled = YES;
             }
 
-            @end
+            - (IBAction)logoutAction:(id)sender{
+                [self showLoadingUI:YES];
+                [self showMessage:@"Signing out of Microsoft..." withTitle:@"Signout from Microsoft"];
+
+                self.loginButton.enabled = YES;
+                self.logoutButton.enabled = NO;
+            }
             ```
 
 1. Create the initial login screen that will be displayed when the application loads, prompting the user to signin to Office 365:
@@ -206,7 +204,8 @@ In this exercise you will create an iOS application and wire up the different sc
 
         ![Screenshot of adding a text field to the login view](./Images/xcode-createux-05.png)
 
-    1. Select and drag the **Button** onto the storyboard design surface.
+    1. Add a signin button to the view:
+        1. Select and drag the **Button** onto the storyboard design surface.
         1. In the **Utilities** panel, select the **Attributes** inspector.
         1. Set the button's text to **Signin to Microsoft**.
         1. With the button selected in the storyboard, in **Utilities** panel, select the **Connections** inspector.
@@ -214,17 +213,26 @@ In this exercise you will create an iOS application and wire up the different sc
 
             ![Screenshot of adding a text field to the login view](./Images/xcode-createux-06.png)
 
-        1. In the box that appears, select **loginAction** to wire the button to the object defined in the **LoginViewController.h** interface file.
+        1. In the box that appears, select **loginButton** to wire the button to the object defined in the **LoginViewController.h** interface file.
         1. Select the circle plus icon in the **Sent Events > Touch Up Inside** option, drag it onto the surface of the login view in the storyboard and select **loginAction**.
 
-            ![Screenshot of the signin button's conenctions](./Images/xcode-createux-08.png)
+            ![Screenshot of the signin button's connections](./Images/xcode-createux-08.png)
 
+    1. Add a signout button to the view:
+        1. Select and drag the **Button** onto the storyboard design surface.
+        1. In the **Utilities** panel, select the **Attributes** inspector.
+        1. Set the button's text to **Signout from Microsoft**.
+        1. Unselect the **Control > State > Enabled** checkbox.
+        1. With the button selected in the storyboard, in **Utilities** panel, select the **Connections** inspector.
+        1. Select the circle plus icon in the **Referencing Outlets > New Referencing Outlet** option and drag it onto the surface of the login view in the storyboard:
+        1. In the box that appears, select **logoutButton** to wire the button to the object defined in the **LoginViewController.h** interface file.
+        1. Select the circle plus icon in the **Sent Events > Touch Up Inside** option, drag it onto the surface of the login view in the storyboard and select **logoutAction**.
     1. Select and drag the **Activity Indicator View** onto the storyboard design surface.
         1. Select the circle plus icon in the **Referencing Outlets > New Referencing Outlet** option, drag it onto the surface of the login view in the storyboard and select **activityIndicator**.
 
 1. Change the storyboard flow so that the login view is displayed when the application loads:
     1. In the **Navigator** panel, select **Main.storyboard**.
-    1. Select the **Navigation Controller** in the left-hand part of the storyboard.
+    1. Select the **Navigation Controller Scene > Navigation Controller** on the left side of the storyboard.
     1. Press <kbd>control</kbd> and drag it onto the **Login View Controller** on the storyboard design surface.
 
         ![Screenshot creating a new segue to the Login View Controller](./Images/xcode-createux-09.png)
@@ -259,9 +267,12 @@ With the application created, now extend it to support authentication with Azure
 
 1. Use the package manager Carthage to add the MSAL for iOS library to the application:
     1. In XCode, select **File > New File**
-    1. Select **Empty File** and select **Next**.
-    1. Name the file **Carthage** and select **Create**. Make sure to save the file in the same folder as the **NativeO365CalendarEvents.xcodeproj** file.
-    1. Add the following to the **Carthage** file:
+    1. Select **Empty** and select **Next**.
+    1. Name the file **Cartfile** and select **Create**. Make sure to save the file in the same folder as the **NativeO365CalendarEvents.xcodeproj** file.
+
+        >Note: It's likely the default location XCode wants to save the file is not where it should go. Make sure to create the file in the same directory as the `*.xcodeproj` file or a future step in the lab will not work.
+
+    1. Add the following to the **Cartfile** file:
 
         ```txt
         github "AzureAD/microsoft-authentication-library-for-objc" "master"
@@ -285,7 +296,7 @@ With the application created, now extend it to support authentication with Azure
 
             ![Screenshot of the project's Linked Frameworks and Libraries](./Images/xcode-auth-02.png)
 
-    1. In the **Build Phases** section of the project's properties, select the **TARGETS > NativeO365CalendarEvents**.
+    1. In the **Build Phases** section of the project's properties, select the **TARGETS > NativeO365CalendarEvents** from the left side panel.
         1. Select the plus icon in the top-left corner and select **New Run Script Phase**.
 
             ![Screenshot of creating a new build script phase](./Images/xcode-auth-03.png)
@@ -293,7 +304,7 @@ With the application created, now extend it to support authentication with Azure
         1. Set the shell script to run:
 
             ```bash
-            usr/local/bin/carthage copy-frameworks
+            /usr/local/bin/carthage copy-frameworks
             ```
 
         1. Set the following **Input Files**:
@@ -327,12 +338,14 @@ With the application created, now extend it to support authentication with Azure
 
     1. In the previous XML, replace the `ENTER_YOUR_CLIENT_ID` with the Azure AD application's ID you copied from a previous step.
 
+        >Note: Be sure to leave the `msal` as the prefix before the Azure AD application's ID so it looks similar to this: `<string>msale1d082fe-32d3-4adb-a0ec-3a2183f4866d</string>`
+
 1. Update the application to handle a response from the MSAL library:
     1. In the **Navigator**, select the **AppDelegate.m** file.
     1. Add the following `import` statement after the existing ones:
 
         ```objc
-        #import <MSAL/msal.h>
+        #import <MSAL/MSAL.h>
         ```
 
     1. Add the following method to the end of the file, before the closing `@end` statement.
@@ -358,10 +371,10 @@ With the application created, now extend it to support authentication with Azure
     1. Add the following `import` statement after the existing ones:
 
         ```objc
-        #import <MSAL/msal.h>
+        #import <MSAL/MSAL.h>
         ```
 
-    1. Add the following code to the body of the **AuthenticationManager** interface:
+    1. Add the following code to the body of the `AuthenticationManager` interface:
 
         ```objc
         // implement singleton pattern as a shared instance
@@ -527,16 +540,26 @@ With the application created, now extend it to support authentication with Azure
         }
         ```
 
+    1. Add the following code to the `AuthenticationManager` class to implement the `clearCredentials()` method:
+
+        ```obj
+        #pragma mark - clear credentials
+        - (void)clearCredentials {
+            NSError *error_ = nil;
+            [self.msalClient removeUser:self.user error:&error_];
+        }
+        ```
+
 1. Update the login controller to wire up the authentication manager:
     1. Open the **LoginViewController.m** file.
-    1. Add the following `import` statement after the existing ones:
+    1. Add the following `import` statements after the existing ones:
 
         ```objc
         #import "AuthenticationManager.h"
         #import <MSAL/MSALUser.h>
         ```
 
-    1. Add the following code after the `import` statements to declare a constant string for the root part of the Auzre AD OAuth v2 endpoints:
+    1. Add the following code after the `import` statements to declare a constant string for the root part of the Azure AD OAuth v2 endpoints:
 
         ```objc
         NSString * const kAuthority   = @"https://login.microsoftonline.com/common/v2.0";
@@ -550,40 +573,57 @@ With the application created, now extend it to support authentication with Azure
 
     1. Replace the contents of the `loginAction()` method with the following code to the existing `LoginViewController` class:
 
-      ```object
-      - (IBAction)loginAction:(id)sender{
-          [self showLoadingUI:YES];
+        ```objc
+        [self showLoadingUI:YES];
 
-          self.scopes = [NSArray arrayWithObjects:@"https://graph.microsoft.com/User.Read", @"https://graph.microsoft.com/Calendars.Read", nil];
+        self.scopes = [NSArray arrayWithObjects:@"https://graph.microsoft.com/User.Read", @"https://graph.microsoft.com/Calendars.Read", nil];
 
-          AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
-          [authenticationManager initWithAuthority:kAuthority completion:^(NSError *error) {
-              if (error) {
-                  [self showLoadingUI:NO];
-                  [self showMessage:@"Please see the log for more details" withTitle:@"InitWithAuthority Error"];
-              } else {
-                  [authenticationManager acquireAuthTokenWithScopes:self.scopes completion:^(MSALErrorCode error) {
-                      if(error){
-                          [self showLoadingUI:NO];
-                          [self showMessage:@"Please see the log for more details" withTitle:@"AcquireAuthToken Error"];
-                      } else {
-                          dispatch_async(dispatch_get_main_queue(), ^{
-                              MSALUser *currentUser = [authenticationManager user];
+        AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
+        [authenticationManager initWithAuthority:kAuthority completion:^(NSError *error) {
+            if (error) {
+                [self showLoadingUI:NO];
+                [self showMessage:@"Please see the log for more details" withTitle:@"InitWithAuthority Error"];
+            } else {
+                [authenticationManager acquireAuthTokenWithScopes:self.scopes completion:^(MSALErrorCode error) {
+                    if(error){
+                        [self showLoadingUI:NO];
+                        [self showMessage:@"Please see the log for more details" withTitle:@"AcquireAuthToken Error"];
 
-                              NSString *successMessage = @"Authentication succeeded for: ";
-                              successMessage = [successMessage stringByAppendingString:[currentUser name]];
-                              successMessage = [successMessage stringByAppendingString:@" ("];
-                              successMessage = [successMessage stringByAppendingString:[currentUser displayableId]];
-                              successMessage = [successMessage stringByAppendingString:@")"];
+                        self.loginButton.enabled = YES;
+                        self.logoutButton.enabled = NO;
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            MSALUser *currentUser = [authenticationManager user];
 
-                              [self showMessage:successMessage withTitle:@"Success"];
-                          });
-                      }
-                  }];
-              }
-          }];
-      }
-      ```
+                            NSString *successMessage = @"Authentication succeeded for: ";
+                            successMessage = [successMessage stringByAppendingString:[currentUser name]];
+                            successMessage = [successMessage stringByAppendingString:@" ("];
+                            successMessage = [successMessage stringByAppendingString:[currentUser displayableId]];
+                            successMessage = [successMessage stringByAppendingString:@")"];
+
+                            [self showMessage:successMessage withTitle:@"Success"];
+
+                            self.loginButton.enabled = NO;
+                            self.logoutButton.enabled = YES;
+                        });
+                    }
+                }];
+            }
+        }];
+        ```
+
+    1. Replace the contents of the `logoutAction()` method with the following code to the existing `LoginViewController` class:
+
+        ```objc
+        [self showLoadingUI:YES];
+        [self showMessage:@"Signing out of Microsoft..." withTitle:@"Signout from Microsoft"];
+
+        AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
+        [authenticationManager clearCredentials];
+
+        self.loginButton.enabled = YES;
+        self.logoutButton.enabled = NO;
+        ```
 
 1. Test the user interface:
     1. Select the play button in the toolbar to build & run the application in the iPhone simulator.
@@ -595,6 +635,8 @@ With the application created, now extend it to support authentication with Azure
     1. After a successful signin, you should see an alert box appear with your name.
 
         ![Screenshot of the iOS displaying the signed in user](./Images/xcode-auth-06.png)
+
+    1. Test the signout process by selecting the **Signout with Microsoft**.
 
 <a name="exercise4"></a>
 
@@ -608,6 +650,7 @@ The last exercise is to incorporate the Microsoft Graph into the application. Fo
         1. In the **Choose options for your new file** dialog, set the following values, select **Next** and then select **Create**:
             * **Class**: CalendarTableViewController
             * **Subclass of**: UITableViewController
+            * **Also create XIB file**: unselected
             * **Language**: Objective-C
     1. Open the **CalendarTableViewController.h** file.
         1. Add the following code to the `CalendarTableViewController` interface:
@@ -618,7 +661,7 @@ The last exercise is to incorporate the Microsoft Graph into the application. Fo
 
 1. Associate the calendar events view with it's new controller:
     1. In the **Navigator** panel, select **Main.storyboard**.
-    1. In the storyboard designer, select the **Root View Controller**
+    1. In the storyboard designer, select the **Root View Controller Scene > Root View Controller**
         1. In the **Utilities** panel, within the **Identity** inspector, set the **Class** to **CalendarTableViewController**.
 
             ![Screenshot associating the calendar view to the controller](./Images/xcode-graph-01.png)
@@ -629,7 +672,7 @@ The last exercise is to incorporate the Microsoft Graph into the application. Fo
 
     1. In the storyboard designer, select the **CalendarList Scene > CalendarList > Table View > Table View Cell**.
         1. In the **Utilities** panel, within the **Identity** inspector, set the **Document > Label** to **calendarListCell**.
-        1. In the **Utilities** panel, within the **Attributes** inspector, set the **Document > Label** to **eventCellTableViewCell**.
+        1. In the **Utilities** panel, within the **Attributes** inspector, set the **Tabel View Cell > Identifier** to **eventCellTableViewCell**.
 
 1. Implement the user interface for the table cells that will display events.
     1. In the **Utilities** panel, drag two **Label** controls from the **Object** library into the white box for the table view cell.
@@ -720,7 +763,7 @@ The last exercise is to incorporate the Microsoft Graph into the application. Fo
         }
         ```
 
-    1. Add the following two utility methods to the `CalendarTableViewController` class:
+    1. Add the following three utility methods to the `CalendarTableViewController` class:
 
         ```objc
         - (UIImage *)imageWithColor:(UIColor *)color {
@@ -826,21 +869,51 @@ The last exercise is to incorporate the Microsoft Graph into the application. Fo
         }
         ```
 
-1. Update the login controller so after a successful login, it will programatically load the calendar event view:
+1. Update the login controller so after a successful login, it will programmatically load the calendar event view:
     1. In the **Navigator**, select the **LoginViewController.m**
     1. Locate the `loginAction()` method in the `LoginViewController` class.
-    1. Add the following lines to the end of the method:
+    1. Within the `loginAction()` method, locate the following `else` statement:
 
         ```objc
-        UIStoryboard *board = [UIStoryboard storyboardWithName:@"Main" bundle:NSBundle.mainBundle];
-        UIViewController *calVC = [board instantiateViewControllerWithIdentifier:@"calendarList"];
-        [self.navigationController pushViewController:calVC animated:YES];
+        ..
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showLoadingUI:NO];
+                MSALUser *currentUser = [authenticationManager user];
+
+                NSString *successMessage = @"Authentication succeeded for: ";
+                successMessage = [successMessage stringByAppendingString:[currentUser name]];
+                successMessage = [successMessage stringByAppendingString:@" ("];
+                successMessage = [successMessage stringByAppendingString:[currentUser displayableId]];
+                successMessage = [successMessage stringByAppendingString:@")"];
+
+                [self showMessage:successMessage withTitle:@"Success"];
+            });
+        }
+        ```
+
+    1. Replace the body of the `dispatch_async()` method with code that will update the login view and navigate to the **calendarList** view:
+
+        ```objc
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showLoadingUI:NO];
+                self.loginButton.enabled = NO;
+                self.logoutButton.enabled = YES;
+
+                UIStoryboard *board = [UIStoryboard storyboardWithName:@"Main" bundle:NSBundle.mainBundle];
+                UIViewController *calVC = [board instantiateViewControllerWithIdentifier:@"calendarList"];
+                [self.navigationController pushViewController:calVC animated:YES];
+            });
+        }
         ```
 
 1. Test the user interface:
     1. Select the play button in the toolbar to build & run the application in the iPhone simulator.
     1. When the application loads in the simulator, select **Signin with Microsoft**.
     1. When prompted, signin using your Office 365 account:
-    1. After a successful signin, you should see an alert box appear with your name.
+    1. After a successful signin, the app will navigate to the view that displays events from your calendar:
 
         ![Screenshot of the iOS prompting the user to login](./Images/xcode-graph-03.png)
+
+    1. Select the **Back** link at the top of the screen to go back to the login view where you can optionally signout.

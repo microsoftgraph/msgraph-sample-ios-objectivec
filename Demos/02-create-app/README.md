@@ -24,10 +24,10 @@ To complete this lab, you need the following:
         * **Product Name**: NativeO365CalendarEvents
         * **Organization Name**: Microsoft
         * **Organization Identifier**: com.microsoft.officedev
-        * **Language**:
-        * Uncheck all additional options
+        * **Language**: Objective-C
+        * Unselect additional options
 
-        ![Screenshot of the "Choose options for your new project" dialog in XCode](../../Images/xcode-createproj-01.png)
+        ![Screenshot of the "Choose options for your new project" dialog in XCode](../../Images/xcode-createproj-02.png)
 
     1. Select **Next**.
 1. Cleanup the default storyboard
@@ -58,36 +58,25 @@ To complete this lab, you need the following:
             ![Screenshot showing setting the initial view for the application](../../Images/xcode-createux-03.png)
 
 1. Create the a view controller that will be used by a new view you will create:
-    1. Create a login view controller interface:
+    1. Create a login view controller:
         1. Select **File > New File**.
-        1. Select **Header File** & select **Next**.
-        1. Name the file **LoginViewController.h** & select **Create**.
-        1. Replace the contents of the file with the following code:
+        1. Select **Cocoa Touch Class** & select **Next**.
+        1. In the **Choose options for your new file** dialog, set the following values, creating the file in the project root folder (the same folder where **AppDelegate.h** is located):
+            * **Class**: LoginViewController
+            * **Subclass of**: UIViewController
+            * **Also create XIB file**: unselected
+            * **Language**: Objective-C
+        1. Open the **LoginViewController.h** file and add the following properties to the interface `LoginViewController`:
 
             ```objc
-            #import <UIKit/UIKit.h>
-            @interface LoginViewController : UIViewController
-
             @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+            @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
             @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
-            @end
             ```
 
-    1. Create a login view controller class:
-        1. Select **File > New File**.
-        1. Select **Header File** & select **Next**.
-        1. Name the file **LoginViewController**, leave the remaining options as their defaults & select **Next** followed by **Create**.
-        1. Replace the contents of the file with the following code:
+        1. Open the **LoginViewController.m** file and replace the contents of the `LoginViewController` class with the following code:
 
             ```objc
-            #import "LoginViewController.h"
-
-            @interface LoginViewController()
-            @end
-
-            @implementation LoginViewController
-
             - (void)viewDidLoad {
                 [super viewDidLoad];
                 self.activityIndicator.hidden = YES;
@@ -128,9 +117,18 @@ To complete this lab, you need the following:
             - (IBAction)loginAction:(id)sender{
                 [self showLoadingUI:YES];
                 [self showMessage:@"Launch browser based login..." withTitle:@"Signin to Microsoft"];
+
+                self.loginButton.enabled = NO;
+                self.logoutButton.enabled = YES;
             }
 
-            @end
+            - (IBAction)logoutAction:(id)sender{
+                [self showLoadingUI:YES];
+                [self showMessage:@"Signing out of Microsoft..." withTitle:@"Signout from Microsoft"];
+
+                self.loginButton.enabled = YES;
+                self.logoutButton.enabled = NO;
+            }
             ```
 
 1. Create the initial login screen that will be displayed when the application loads, prompting the user to signin to Office 365:
@@ -153,7 +151,8 @@ To complete this lab, you need the following:
 
         ![Screenshot of adding a text field to the login view](../../Images/xcode-createux-05.png)
 
-    1. Select and drag the **Button** onto the storyboard design surface.
+    1. Add a signin button to the view:
+        1. Select and drag the **Button** onto the storyboard design surface.
         1. In the **Utilities** panel, select the **Attributes** inspector.
         1. Set the button's text to **Signin to Microsoft**.
         1. With the button selected in the storyboard, in **Utilities** panel, select the **Connections** inspector.
@@ -161,17 +160,26 @@ To complete this lab, you need the following:
 
             ![Screenshot of adding a text field to the login view](../../Images/xcode-createux-06.png)
 
-        1. In the box that appears, select **loginAction** to wire the button to the object defined in the **LoginViewController.h** interface file.
+        1. In the box that appears, select **loginButton** to wire the button to the object defined in the **LoginViewController.h** interface file.
         1. Select the circle plus icon in the **Sent Events > Touch Up Inside** option, drag it onto the surface of the login view in the storyboard and select **loginAction**.
 
-            ![Screenshot of the signin button's conenctions](../../Images/xcode-createux-08.png)
+            ![Screenshot of the signin button's connections](../../Images/xcode-createux-08.png)
 
+    1. Add a signout button to the view:
+        1. Select and drag the **Button** onto the storyboard design surface.
+        1. In the **Utilities** panel, select the **Attributes** inspector.
+        1. Set the button's text to **Signout from Microsoft**.
+        1. Unselect the **Control > State > Enabled** checkbox.
+        1. With the button selected in the storyboard, in **Utilities** panel, select the **Connections** inspector.
+        1. Select the circle plus icon in the **Referencing Outlets > New Referencing Outlet** option and drag it onto the surface of the login view in the storyboard:
+        1. In the box that appears, select **logoutButton** to wire the button to the object defined in the **LoginViewController.h** interface file.
+        1. Select the circle plus icon in the **Sent Events > Touch Up Inside** option, drag it onto the surface of the login view in the storyboard and select **logoutAction**.
     1. Select and drag the **Activity Indicator View** onto the storyboard design surface.
         1. Select the circle plus icon in the **Referencing Outlets > New Referencing Outlet** option, drag it onto the surface of the login view in the storyboard and select **activityIndicator**.
 
 1. Change the storyboard flow so that the login view is displayed when the application loads:
     1. In the **Navigator** panel, select **Main.storyboard**.
-    1. Select the **Navigation Controller** in the left-hand part of the storyboard.
+    1. Select the **Navigation Controller Scene > Navigation Controller** on the left side of the storyboard.
     1. Press <kbd>control</kbd> and drag it onto the **Login View Controller** on the storyboard design surface.
 
         ![Screenshot creating a new segue to the Login View Controller](../../Images/xcode-createux-09.png)
