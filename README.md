@@ -1,8 +1,8 @@
-# Microsoft Graph Training Module - Building iOS Objective-C Apps
+# Microsoft Graph Training Module - Build iOS native apps with the Microsoft Graph REST API
 
 This module will introduce you to working with the Microsoft Graph SDK to access data in Office 365 by building native mobile iOS applications with Objective-C.
 
-## Lab - Build iOS Objective-C applications with the Microsoft Graph
+## Lab - Build iOS native apps with the Microsoft Graph REST API
 
 In this lab you will create an iOS application written in Objective-C using the Azure AD v2 authentication endpoint and the Microsoft Authentication Library (MSAL) to access data in Office 365 using the Microsoft Graph REST API.
 
