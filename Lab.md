@@ -1,4 +1,4 @@
-# Build iOS Objective-C native applications with the Microsoft Graph
+# Build iOS native apps with the Microsoft Graph REST API
 
 In this lab you will create an Android application using the Azure AD v2 authentication endpoint and the Microsoft Authentication Library (MSAL) to access data in Office 365 using the Microsoft Graph REST API.
 
