@@ -95,7 +95,7 @@ In this exercise you will create an iOS application and wire up the different sc
 
         ![Screenshot of XCode Project Manager panel](./Images/xcode-createux-01.png)
 
-    1. Select all the items in the storyboard by selecting any of the elements int he design surface and press <kbd>delete</kbd>.
+    1. Select all the items in the storyboard by selecting any of the elements in the design surface and press <kbd>delete</kbd>.
 1. Create the application's UI in the storyboard:
     1. In the **Navigator** panel, select **Main.storyboard**.
     1. In the **Utilities** panel, select the **Show Object library**
@@ -202,12 +202,12 @@ In this exercise you will create an iOS application and wire up the different sc
         1. In the **Utilities** panel, select the **Attributes** inspector.
         1. Set the **Text** to **Office 365 Calendar Events**.
 
-        ![Screenshot of adding a text field to the login view](./Images/xcode-createux-05.png)
+            ![Screenshot of adding a text field to the login view](./Images/xcode-createux-05.png)
 
     1. Add a signin button to the view:
         1. Select and drag the **Button** onto the storyboard design surface.
         1. In the **Utilities** panel, select the **Attributes** inspector.
-        1. Set the button's text to **Signin to Microsoft**.
+        1. Set the button's **Title** to **Signin to Microsoft**.
         1. With the button selected in the storyboard, in **Utilities** panel, select the **Connections** inspector.
         1. Select the circle plus icon in the **Referencing Outlets > New Referencing Outlet** option and drag it onto the surface of the login view in the storyboard:
 
@@ -221,7 +221,7 @@ In this exercise you will create an iOS application and wire up the different sc
     1. Add a signout button to the view:
         1. Select and drag the **Button** onto the storyboard design surface.
         1. In the **Utilities** panel, select the **Attributes** inspector.
-        1. Set the button's text to **Signout from Microsoft**.
+        1. Set the button's **Title** to **Signout from Microsoft**.
         1. Unselect the **Control > State > Enabled** checkbox.
         1. With the button selected in the storyboard, in **Utilities** panel, select the **Connections** inspector.
         1. Select the circle plus icon in the **Referencing Outlets > New Referencing Outlet** option and drag it onto the surface of the login view in the storyboard:
