@@ -16,7 +16,7 @@ To complete this lab, you need the following:
 * Office 365 tenancy
   * If you do not have one, you obtain one (for free) by signing up to the [Office 365 Developer Program](https://developer.microsoft.com/en-us/office/dev-program).
 * Desktop / laptop running MacOS
-* [XCode v9](https://developer.apple.com/xcode/)
+* [XCode v10.1](https://developer.apple.com/xcode/)
 * [Carthage v0.29.0](https://github.com/Carthage/Carthage)
 
 <a name="exercise1"></a>
@@ -83,6 +83,7 @@ In this exercise you will create an iOS application and wire up the different sc
         ![Screenshot of the "Choose options for your new project" dialog in XCode](./Images/xcode-createproj-02.png)
 
     1. Select **Next**.
+    1. When prompted, select a location where to create the project on your workstation.
 1. Cleanup the default storyboard
     1. In the **Navigator** panel, select the following files and delete them:
         * RootViewController.h
@@ -98,7 +99,7 @@ In this exercise you will create an iOS application and wire up the different sc
     1. Select all the items in the storyboard by selecting any of the elements in the design surface and press <kbd>delete</kbd>.
 1. Create the application's UI in the storyboard:
     1. In the **Navigator** panel, select **Main.storyboard**.
-    1. In the **Utilities** panel, select the **Show Object library**
+    1. In the **Utilities** panel, select the **Library** button in the toolbar (*#1 in the figure below*) to open the **Object Library**.
     1. Select and drag the **Navigation Controller** onto the storyboard design surface:
 
         ![Screenshot of XCode Storyboard Creation](./Images/xcode-createux-02.png)
@@ -186,7 +187,7 @@ In this exercise you will create an iOS application and wire up the different sc
 
 1. Create the initial login screen that will be displayed when the application loads, prompting the user to signin to Office 365:
     1. In the **Navigator** panel, select **Main.storyboard**.
-    1. In the **Utilities** panel, select the **Show Object library**
+    1. Select the **Library** button in the toolbar to open the **Object Library**.
     1. Select and drag the **View Controller** onto the storyboard design surface:
 
         ![Screenshot of adding a View Controller to the storyboard](./Images/xcode-createux-04.png)
@@ -196,7 +197,7 @@ In this exercise you will create an iOS application and wire up the different sc
         1. In the **Utilities** panel, select the **Identity** inspector.
         1. Set the **Class** to **LoginViewController**.
 
-            ![Screenshot of setting hte controller for the login view](./Images/xcode-createux-07.png)
+            ![Screenshot of setting the controller for the login view](./Images/xcode-createux-07.png)
 
     1. Select and drag the **Text Field** onto the storyboard design surface.
         1. In the **Utilities** panel, select the **Attributes** inspector.
@@ -208,6 +209,9 @@ In this exercise you will create an iOS application and wire up the different sc
         1. Select and drag the **Button** onto the storyboard design surface.
         1. In the **Utilities** panel, select the **Attributes** inspector.
         1. Set the button's **Title** to **Signin to Microsoft**.
+
+            ![Screenshot of adding button to login to login view](./Images/xcode-createux-14.png)
+
         1. With the button selected in the storyboard, in **Utilities** panel, select the **Connections** inspector.
         1. Select the circle plus icon in the **Referencing Outlets > New Referencing Outlet** option and drag it onto the surface of the login view in the storyboard:
 

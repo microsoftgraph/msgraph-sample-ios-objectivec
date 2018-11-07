@@ -7,29 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		403251C320CAEDA40015C39F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 403251C220CAEDA40015C39F /* AppDelegate.m */; };
-		403251CF20CAEDA40015C39F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 403251CD20CAEDA40015C39F /* Main.storyboard */; };
-		403251D120CAEDA50015C39F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 403251D020CAEDA50015C39F /* Assets.xcassets */; };
-		403251D420CAEDA50015C39F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 403251D220CAEDA50015C39F /* LaunchScreen.storyboard */; };
-		403251D720CAEDA50015C39F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 403251D620CAEDA50015C39F /* main.m */; };
-		403251E220CB0A9C0015C39F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 403251E120CB0A9C0015C39F /* LoginViewController.m */; };
+		40FB24A721930A3000635E4D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FB24A621930A3000635E4D /* AppDelegate.m */; };
+		40FB24B321930A3000635E4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40FB24B121930A3000635E4D /* Main.storyboard */; };
+		40FB24B521930A3100635E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40FB24B421930A3100635E4D /* Assets.xcassets */; };
+		40FB24B821930A3100635E4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40FB24B621930A3100635E4D /* LaunchScreen.storyboard */; };
+		40FB24BB21930A3100635E4D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FB24BA21930A3100635E4D /* main.m */; };
+		40FB24C321932C5000635E4D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FB24C221932C5000635E4D /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		403251BE20CAEDA40015C39F /* NativeO365CalendarEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NativeO365CalendarEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		403251C120CAEDA40015C39F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		403251C220CAEDA40015C39F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		403251CE20CAEDA40015C39F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		403251D020CAEDA50015C39F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		403251D320CAEDA50015C39F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		403251D520CAEDA50015C39F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		403251D620CAEDA50015C39F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		403251E020CB0A150015C39F /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		403251E120CB0A9C0015C39F /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		40FB24A221930A3000635E4D /* NativeO365CalendarEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NativeO365CalendarEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		40FB24A521930A3000635E4D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		40FB24A621930A3000635E4D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		40FB24B221930A3000635E4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		40FB24B421930A3100635E4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		40FB24B721930A3100635E4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		40FB24B921930A3100635E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40FB24BA21930A3100635E4D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		40FB24C121932C5000635E4D /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		40FB24C221932C5000635E4D /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		403251BB20CAEDA40015C39F /* Frameworks */ = {
+		40FB249F21930A3000635E4D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,34 +39,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		403251B520CAEDA40015C39F = {
+		40FB249921930A3000635E4D = {
 			isa = PBXGroup;
 			children = (
-				403251C020CAEDA40015C39F /* NativeO365CalendarEvents */,
-				403251BF20CAEDA40015C39F /* Products */,
+				40FB24A421930A3000635E4D /* NativeO365CalendarEvents */,
+				40FB24A321930A3000635E4D /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		403251BF20CAEDA40015C39F /* Products */ = {
+		40FB24A321930A3000635E4D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				403251BE20CAEDA40015C39F /* NativeO365CalendarEvents.app */,
+				40FB24A221930A3000635E4D /* NativeO365CalendarEvents.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		403251C020CAEDA40015C39F /* NativeO365CalendarEvents */ = {
+		40FB24A421930A3000635E4D /* NativeO365CalendarEvents */ = {
 			isa = PBXGroup;
 			children = (
-				403251C120CAEDA40015C39F /* AppDelegate.h */,
-				403251C220CAEDA40015C39F /* AppDelegate.m */,
-				403251CD20CAEDA40015C39F /* Main.storyboard */,
-				403251D020CAEDA50015C39F /* Assets.xcassets */,
-				403251D220CAEDA50015C39F /* LaunchScreen.storyboard */,
-				403251D520CAEDA50015C39F /* Info.plist */,
-				403251D620CAEDA50015C39F /* main.m */,
-				403251E020CB0A150015C39F /* LoginViewController.h */,
-				403251E120CB0A9C0015C39F /* LoginViewController.m */,
+				40FB24A521930A3000635E4D /* AppDelegate.h */,
+				40FB24A621930A3000635E4D /* AppDelegate.m */,
+				40FB24B121930A3000635E4D /* Main.storyboard */,
+				40FB24C121932C5000635E4D /* LoginViewController.h */,
+				40FB24C221932C5000635E4D /* LoginViewController.m */,
+				40FB24B421930A3100635E4D /* Assets.xcassets */,
+				40FB24B621930A3100635E4D /* LaunchScreen.storyboard */,
+				40FB24B921930A3100635E4D /* Info.plist */,
+				40FB24BA21930A3100635E4D /* main.m */,
 			);
 			path = NativeO365CalendarEvents;
 			sourceTree = "<group>";
@@ -74,13 +74,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		403251BD20CAEDA40015C39F /* NativeO365CalendarEvents */ = {
+		40FB24A121930A3000635E4D /* NativeO365CalendarEvents */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 403251DA20CAEDA50015C39F /* Build configuration list for PBXNativeTarget "NativeO365CalendarEvents" */;
+			buildConfigurationList = 40FB24BE21930A3100635E4D /* Build configuration list for PBXNativeTarget "NativeO365CalendarEvents" */;
 			buildPhases = (
-				403251BA20CAEDA40015C39F /* Sources */,
-				403251BB20CAEDA40015C39F /* Frameworks */,
-				403251BC20CAEDA40015C39F /* Resources */,
+				40FB249E21930A3000635E4D /* Sources */,
+				40FB249F21930A3000635E4D /* Frameworks */,
+				40FB24A021930A3000635E4D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -88,24 +88,24 @@
 			);
 			name = NativeO365CalendarEvents;
 			productName = NativeO365CalendarEvents;
-			productReference = 403251BE20CAEDA40015C39F /* NativeO365CalendarEvents.app */;
+			productReference = 40FB24A221930A3000635E4D /* NativeO365CalendarEvents.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		403251B620CAEDA40015C39F /* Project object */ = {
+		40FB249A21930A3000635E4D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Microsoft;
 				TargetAttributes = {
-					403251BD20CAEDA40015C39F = {
-						CreatedOnToolsVersion = 9.4;
+					40FB24A121930A3000635E4D = {
+						CreatedOnToolsVersion = 10.1;
 					};
 				};
 			};
-			buildConfigurationList = 403251B920CAEDA40015C39F /* Build configuration list for PBXProject "NativeO365CalendarEvents" */;
+			buildConfigurationList = 40FB249D21930A3000635E4D /* Build configuration list for PBXProject "NativeO365CalendarEvents" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -113,55 +113,55 @@
 				en,
 				Base,
 			);
-			mainGroup = 403251B520CAEDA40015C39F;
-			productRefGroup = 403251BF20CAEDA40015C39F /* Products */;
+			mainGroup = 40FB249921930A3000635E4D;
+			productRefGroup = 40FB24A321930A3000635E4D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				403251BD20CAEDA40015C39F /* NativeO365CalendarEvents */,
+				40FB24A121930A3000635E4D /* NativeO365CalendarEvents */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		403251BC20CAEDA40015C39F /* Resources */ = {
+		40FB24A021930A3000635E4D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				403251D420CAEDA50015C39F /* LaunchScreen.storyboard in Resources */,
-				403251D120CAEDA50015C39F /* Assets.xcassets in Resources */,
-				403251CF20CAEDA40015C39F /* Main.storyboard in Resources */,
+				40FB24B821930A3100635E4D /* LaunchScreen.storyboard in Resources */,
+				40FB24B521930A3100635E4D /* Assets.xcassets in Resources */,
+				40FB24B321930A3000635E4D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		403251BA20CAEDA40015C39F /* Sources */ = {
+		40FB249E21930A3000635E4D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				403251D720CAEDA50015C39F /* main.m in Sources */,
-				403251C320CAEDA40015C39F /* AppDelegate.m in Sources */,
-				403251E220CB0A9C0015C39F /* LoginViewController.m in Sources */,
+				40FB24BB21930A3100635E4D /* main.m in Sources */,
+				40FB24A721930A3000635E4D /* AppDelegate.m in Sources */,
+				40FB24C321932C5000635E4D /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		403251CD20CAEDA40015C39F /* Main.storyboard */ = {
+		40FB24B121930A3000635E4D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				403251CE20CAEDA40015C39F /* Base */,
+				40FB24B221930A3000635E4D /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		403251D220CAEDA50015C39F /* LaunchScreen.storyboard */ = {
+		40FB24B621930A3100635E4D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				403251D320CAEDA50015C39F /* Base */,
+				40FB24B721930A3100635E4D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		403251D820CAEDA50015C39F /* Debug */ = {
+		40FB24BC21930A3100635E4D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -220,14 +220,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		403251D920CAEDA50015C39F /* Release */ = {
+		40FB24BD21930A3100635E4D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -272,14 +273,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		403251DB20CAEDA50015C39F /* Debug */ = {
+		40FB24BF21930A3100635E4D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -295,7 +297,7 @@
 			};
 			name = Debug;
 		};
-		403251DC20CAEDA50015C39F /* Release */ = {
+		40FB24C021930A3100635E4D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -314,25 +316,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		403251B920CAEDA40015C39F /* Build configuration list for PBXProject "NativeO365CalendarEvents" */ = {
+		40FB249D21930A3000635E4D /* Build configuration list for PBXProject "NativeO365CalendarEvents" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				403251D820CAEDA50015C39F /* Debug */,
-				403251D920CAEDA50015C39F /* Release */,
+				40FB24BC21930A3100635E4D /* Debug */,
+				40FB24BD21930A3100635E4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		403251DA20CAEDA50015C39F /* Build configuration list for PBXNativeTarget "NativeO365CalendarEvents" */ = {
+		40FB24BE21930A3100635E4D /* Build configuration list for PBXNativeTarget "NativeO365CalendarEvents" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				403251DB20CAEDA50015C39F /* Debug */,
-				403251DC20CAEDA50015C39F /* Release */,
+				40FB24BF21930A3100635E4D /* Debug */,
+				40FB24C021930A3100635E4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 403251B620CAEDA40015C39F /* Project object */;
+	rootObject = 40FB249A21930A3000635E4D /* Project object */;
 }
