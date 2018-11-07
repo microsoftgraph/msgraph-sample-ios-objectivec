@@ -28,12 +28,13 @@ This module has been recorded and is available in the Office Development YouTube
 
 ## Version history
 
-| Version | Date               | Comments                                       |
-| ------- | ------------------ | ---------------------------------------------- |
-| 1.3     | September 7, 2018  | 2019Q1 content refresh                         |
-| 1.2     | June 28, 2018      | Added screencast.                              |
-| 1.1     | June 8, 2018       | Rewritten to use latest guidance.              |
-| 1.0     | ~November 24, 2017 | Add Microsoft Graph related product breakouts. |
+| Version |        Date        |                                                               Comments                                                               |
+| ------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 1.4     | November 7, 2018   | 2019Q2 content refresh; Replaced process to use Cocoapods instead of Carthage for including MSAL iOS SDK; updated lab for XCode 10.1 |
+| 1.3     | September 7, 2018  | 2019Q1 content refresh                                                                                                               |
+| 1.2     | June 28, 2018      | Added screencast.                                                                                                                    |
+| 1.1     | June 8, 2018       | Rewritten to use latest guidance.                                                                                                    |
+| 1.0     | ~November 24, 2017 | Add Microsoft Graph related product breakouts.                                                                                       |
 
 ## Disclaimer
 
