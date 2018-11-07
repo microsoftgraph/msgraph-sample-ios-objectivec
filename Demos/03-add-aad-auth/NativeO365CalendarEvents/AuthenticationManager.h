@@ -1,5 +1,15 @@
+//
+//  AuthenticationManager.h
+//  NativeO365CalendarEvents
+//
+//  Created by Andrew Connell on 11/7/18.
+//  Copyright © 2018 Microsoft. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 #import <MSAL/MSAL.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface AuthenticationManager : NSObject
 
@@ -27,3 +37,5 @@
 - (NSString *)getRedirectUrlFromMSALArray:(NSArray *) array;
 
 @end
+
+NS_ASSUME_NONNULL_END
