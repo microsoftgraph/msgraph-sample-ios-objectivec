@@ -1,23 +1,31 @@
+//
+//  CalendarTableViewController.m
+//  NativeO365CalendarEvents
+//
+//  Created by Andrew Connell on 11/7/18.
+//  Copyright © 2018 Microsoft. All rights reserved.
+//
+
 #import "CalendarTableViewController.h"
 #import "AuthenticationManager.h"
 #import <MSAL/MSAL.h>
 
 @interface CalendarTableViewController ()
-
+@property (strong, nonatomic) NSMutableArray* eventsList;
 @end
 
 @implementation CalendarTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.eventsList = [[NSMutableArray alloc] init];
     [self getEvents];
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void)getEvents
@@ -88,7 +96,6 @@
     NSDateFormatter *retdateFormat = [[NSDateFormatter alloc] init];
     [retdateFormat setDateFormat:@"yyyy'/'MM'/'dd HH':'mm"];
     
-    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSSSSS"];
     NSDate *convertData =[formatter dateFromString:stringDate];
@@ -98,16 +105,16 @@
     return result;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 300, 200)];
-
+    
     UIButton* actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [actionButton setFrame:CGRectMake(15, 15, 100, 40)];
     [actionButton setBackgroundImage:[self imageWithColor:[UIColor grayColor]] forState:UIControlStateNormal];
     [actionButton setTitle:@"Reload" forState:UIControlStateNormal];
     [actionButton addTarget:self action:@selector(getEvents) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:actionButton];
-
+    
     NSString *lbl1str = @"The events in the last 30 days.";
     UILabel *lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 55, 280, 30)];
     lbl1.text = lbl1str;
@@ -115,23 +122,13 @@
     lbl1.font = [UIFont systemFontOfSize:16];
     lbl1.textColor = [UIColor colorWithRed:136.00f/255.00f green:136.00f/255.00f blue:136.00f/255.00f alpha:1];
     [view addSubview:lbl1];
-
+    
     return view;
 }
-
-#pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 100;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.eventsList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -145,21 +142,33 @@
     UILabel *subjectLabel = (UILabel *)[cell viewWithTag:100];
     NSDictionary *calendarItem = [self.eventsList objectAtIndex:indexPath.row];
     subjectLabel.text = [calendarItem valueForKey:@"subject"]; // ((MSGraphEvent *)[self.eventsList objectAtIndex:indexPath.row]).subject;;
-
+    
     NSString *startTime = (NSString *)[[calendarItem valueForKey:@"start"] valueForKey:@"dateTime"];
     NSString *endTime = (NSString *)[[calendarItem valueForKey:@"end"] valueForKey:@"dateTime"];
     
     NSString *startText = [NSString stringWithFormat:@"Start: %@",[self converStringToDateString:startTime]];
     NSString *endText = [NSString stringWithFormat:@"%@",[self converStringToDateString:endTime]];
-
+    
     NSString *eventDatetime = startText;
     eventDatetime = [eventDatetime stringByAppendingString:@" - "];
     eventDatetime = [eventDatetime stringByAppendingString:endText];
-
+    
     UILabel *dateLabel = (UILabel *)[cell viewWithTag:200];
     dateLabel.text = eventDatetime;
-
+    
     return cell;
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+#warning Incomplete implementation, return the number of sections
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+#warning Incomplete implementation, return the number of rows
+    return [self.eventsList count];
 }
 
 /*

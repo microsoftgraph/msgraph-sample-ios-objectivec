@@ -2,7 +2,7 @@
 //  main.m
 //  NativeO365CalendarEvents
 //
-//  Created by Andrew Connell on 6/8/18.
+//  Created by Andrew Connell on 11/7/18.
 //  Copyright © 2018 Microsoft. All rights reserved.
 //
 
