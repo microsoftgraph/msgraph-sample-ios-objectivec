@@ -5,7 +5,7 @@ With the application created, now extend it to support authentication with Azure
 Alternatively, you can open the final solution from this demo located in this folder. Refer to the prerequisites for what you need to run the demo.
 
 > To run the solution in this demo without recreating the solution, do the following:
-> * from the project root run the command `carthage update` to download * build the MSAL library
+> * from the project root run the command `pod install` to download & build the MSAL library
 > * Open the `Info.plist` file and replace the `ENTER_YOUR_CLIENT_ID` in the last setting with your Azure AD application ID
 
 ## Prerequisites
@@ -16,61 +16,39 @@ To complete this lab, you need the following:
   * If you do not have one, you obtain one (for free) by signing up to the [Office 365 Developer Program](https://developer.microsoft.com/en-us/office/dev-program).
 * Azure AD application registered using the [App Registration portal](https://apps.dev.microsoft.com) with a native platform configured.
 * Desktop / laptop running MacOS
-* [XCode v9](https://developer.apple.com/xcode/)
-* [Carthage v0.29.0](https://github.com/Carthage/Carthage)
+* [XCode v10.1](https://developer.apple.com/xcode/)
+* [Cocoapods](https://cocoapods.org)
 
 ## Demo steps
 
-1. Use the package manager Carthage to add the MSAL for iOS library to the application:
-    1. In XCode, select **File > New File**
-    1. Select **Empty** and select **Next**.
-    1. Name the file **Cartfile** and select **Create**. Make sure to save the file in the same folder as the **NativeO365CalendarEvents.xcodeproj** file.
+With the application created, now extend it to support authentication with Azure AD. This is required to obtain the necessary OAuth access token to call the Microsoft Graph. In this exercise you will integrate the Microsoft Authentication Library (MSAL) into the application.
 
-        >Note: It's likely the default location XCode wants to save the file is not where it should go. Make sure to create the file in the same directory as the `*.xcodeproj` file or a future step in the lab will not work.
-
-    1. Add the following to the **Cartfile** file:
+1. If the iOS application is open from a previous session, close it.
+1. Add the MSAL iOS SDK via [Cocoapods](https://cocoapods.org/):
+    1. From a command prompt, go to the root folder for the project:
+    1. Execute `pod init` to initialize Cocoapoads and create a **podfile**.
+    1. Open the **Podfile** created in the root of the project folder.
+    1. Add the line `pod 'MSAL', '~> 0.2'` immediately before the closing `end`. The contents of the file should look similar to the following:
 
         ```txt
-        github "AzureAD/microsoft-authentication-library-for-objc" "master"
+        # Uncomment the next line to define a global platform for your project
+        # platform :ios, '9.0'
+
+        target 'NativeO365CalendarEvents' do
+          # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+          # use_frameworks!
+
+          # Pods for NativeO365CalendarEvents
+
+          pod 'MSAL', '~> 0.2'
+
+        end
         ```
 
-    1. Launch a Terminal and change to the folder where the project is located.
-    1. Execute the following commend in the Terminal to download and build the MSAL library:
-
-        ```shell
-        carthage update
-        ```
-
-    1. Add the MSAL library to the project's linked frameworks:
-        1. In the **Navigator**, select the project.
-        1. In the **General** section of the project's properties, select the plus control in the **Linked Frameworks and Libraries** section.
-
-            ![Screenshot of the project's Linked Frameworks and Libraries](../../Images/xcode-auth-01.png)
-
-        1. In the **Choose frameworks and libraries to add**, select **Add Other**.
-        1. Select the **MSAL.Framework** folder from **./Carthage/Build/iOS** folder.
-
-            ![Screenshot of the project's Linked Frameworks and Libraries](../../Images/xcode-auth-02.png)
-
-    1. In the **Build Phases** section of the project's properties, select the **TARGETS > NativeO365CalendarEvents** from the left side panel.
-        1. Select the plus icon in the top-left corner and select **New Run Script Phase**.
-
-            ![Screenshot of creating a new build script phase](../../Images/xcode-auth-03.png)
-
-        1. Set the shell script to run:
-
-            ```bash
-            /usr/local/bin/carthage copy-frameworks
-            ```
-
-        1. Set the following **Input Files**:
-
-            ```bash
-            $(SRCROOT)/Carthage/Build/iOS/MSAL.framework
-            ```
-
-            ![Screenshot adding the run script details](../../Images/xcode-auth-04.png)
-
+    1. From the command prompt, execute `pod install` to install the MSAL iOS SDK via Cocoapods.
+1. Open the project workspace in XCode:
+    1. In XCode, select **File > Open**.
+    1. Select the workspace file **NativeO365CalendarEvents.xcworkspace** and select **Open**.
 1. Update the application's configuration to include the Azure AD application's ID:
     1. In the **Navigator**, right-click the **Info.plist** file and select **Open As > Source Code**.
     1. Add the following XML immediately before the closing `</dict>` element:

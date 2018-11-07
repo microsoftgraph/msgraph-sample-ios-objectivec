@@ -1,3 +1,11 @@
+//
+//  AuthenticationManager.m
+//  NativeO365CalendarEvents
+//
+//  Created by Andrew Connell on 11/7/18.
+//  Copyright © 2018 Microsoft. All rights reserved.
+//
+
 #import "AuthenticationManager.h"
 #import <MSAL/MSAL.h>
 
@@ -54,13 +62,12 @@
     
     return sharedInstance;
 }
-
+    
 #pragma mark - acquire token
 - (void)acquireAuthTokenWithScopes:(NSArray<NSString *> *)scopes
-                        completion:(void(^)(MSALErrorCode error))completion
-{
-    NSError  __autoreleasing  *error_ = nil;
+                        completion:(void(^)(MSALErrorCode error))completion {
     
+    NSError  __autoreleasing  *error_ = nil;
     NSArray<MSALUser *> *users = [self.msalClient users:(&error_)];
     
     if (self.msalClient == nil) {
@@ -107,11 +114,10 @@
     }
 }
 
--(void) acquireAuthTokenCompletion:(void (^)(MSALErrorCode *error))completion{
-}
-
+    -(void) acquireAuthTokenCompletion:(void (^)(MSALErrorCode *error))completion{
+    }
+    
 #pragma mark - Get client id from bundle
-
 - (NSString *) getRedirectUrlFromMSALArray:(NSArray *) array {
     NSDictionary *arrayElement = [array objectAtIndex: 0];
     NSArray *redirectArray = [arrayElement valueForKeyPath:@"CFBundleURLSchemes"];
@@ -120,7 +126,6 @@
 }
 
 #pragma mark - clear credentials
-//Clears the ADAL token cache and the cookie cache.
 - (void)clearCredentials {
     NSError *error_ = nil;
     [self.msalClient removeUser:self.user error:&error_];

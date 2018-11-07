@@ -16,8 +16,8 @@ To complete this lab, you need the following:
   * If you do not have one, you obtain one (for free) by signing up to the [Office 365 Developer Program](https://developer.microsoft.com/en-us/office/dev-program).
 * Azure AD application registered using the [App Registration portal](https://apps.dev.microsoft.com) with a native platform configured.
 * Desktop / laptop running MacOS
-* [XCode v9](https://developer.apple.com/xcode/)
-* [Carthage v0.29.0](https://github.com/Carthage/Carthage)
+* [XCode v10.1](https://developer.apple.com/xcode/)
+* [Cocoapods](https://cocoapods.org)
 
 ## Demo
 
@@ -46,10 +46,9 @@ To complete this lab, you need the following:
         1. In the **Utilities** panel, within the **Identity** inspector:
             * Set the **Identity > Storyboard ID** to **calendarList**.
             * Set the **Document > Label** to **CalendarList**.
-
     1. In the storyboard designer, select the **CalendarList Scene > CalendarList > Table View > Table View Cell**.
         1. In the **Utilities** panel, within the **Identity** inspector, set the **Document > Label** to **calendarListCell**.
-        1. In the **Utilities** panel, within the **Attributes** inspector, set the **Tabel View Cell > Identifier** to **eventCellTableViewCell**.
+        1. In the **Utilities** panel, within the **Attributes** inspector, set the **Table View Cell > Identifier** to **eventCellTableViewCell**.
 
 1. Implement the user interface for the table cells that will display events.
     1. In the **Utilities** panel, drag two **Label** controls from the **Object** library into the white box for the table view cell.
@@ -57,7 +56,7 @@ To complete this lab, you need the following:
         * Stretch the width of the labels to go to the right edge of the screen to avoid wrapping.
     1. In the **Utilities** panel, within the **Attributes** inspector, modify the formatting of the two labels as you would like them to appear
 
-        ![Screenshot associating the calendar view to the controller](../../Images/xcode-graph-01.png)
+        ![Screenshot associating the calendar view to the controller](../../Images/xcode-graph-02.png)
 
     1. In the **Utilities** panel, within the **Identity** inspector, set the **Document > Label** for the two labels to the following values:
         * subjectLabel
@@ -80,13 +79,6 @@ To complete this lab, you need the following:
 
 1. Implement the calendar view's controller:
     1. Open the **CalendarTableViewController.m** file.
-    1. Add the following code to the `viewDidLoad()` method:
-
-        ```objc
-        self.eventsList = [[NSMutableArray alloc] init];
-        [self getEvents];
-        ```
-
     1. Add the following method to the `CalendarTableViewController` class:
 
         ```objc
@@ -138,6 +130,13 @@ To complete this lab, you need the following:
 
             [task resume];
         }
+        ```
+
+    1. Add the following code to the `viewDidLoad()` method:
+
+        ```objc
+        self.eventsList = [[NSMutableArray alloc] init];
+        [self getEvents];
         ```
 
     1. Add the following three utility methods to the `CalendarTableViewController` class:
