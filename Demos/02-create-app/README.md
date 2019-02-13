@@ -148,7 +148,7 @@ To complete this lab, you need the following:
 
     1. Select and drag the **Text Field** onto the storyboard design surface.
         1. In the **Utilities** panel, select the **Attributes** inspector.
-        1. Set the **Text** to **Office 365 Calendar Events**.
+        1. Set the **Text Field** to **Office 365 Calendar Events**.
 
         ![Screenshot of adding a text field to the login view](../../Images/xcode-createux-05.png)
 
