@@ -21,15 +21,16 @@ This module has been recorded and is available in the Office Development YouTube
 
 ## Contributors
 
-| Roles                | Author(s)                                               |
-| -------------------- | ------------------------------------------------------- |
-| Lab Manuals / Slides | Andrew Connell (Microsoft MVP, Voitanos) @andrewconnell |
-| Sponsor / Support    | Yina Arenas (Microsoft) @yinaa                          |
+|        Roles         |                                       Author(s)                                       |
+| -------------------- | ------------------------------------------------------------------------------------- |
+| Lab Manuals / Slides | Andrew Connell (Microsoft MVP, Voitanos) [@andrewconnell](//github.com/andrewconnell) |
+| Sponsor / Support    | Yina Arenas (Microsoft) [@yinaa](//github.com/yinaa)                                  |
 
 ## Version history
 
 | Version | Date               | Comments                                                                                                                             |
 | ------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 1.6     | February 12, 2019  | 2019Q4 content refresh                                                                                                               |
 | 1.5     | February 12, 2019  | 2019Q3 content refresh                                                                                                               |
 | 1.4     | November 7, 2018   | 2019Q2 content refresh; Replaced process to use Cocoapods instead of Carthage for including MSAL iOS SDK; updated lab for XCode 10.1 |
 | 1.3     | September 7, 2018  | 2019Q1 content refresh                                                                                                               |

@@ -4,66 +4,67 @@ In this lab you will create an Android application using the Azure AD v2 authent
 
 ## In this lab
 
-* [Create an Azure AD native application with the App Registration Portal](#exercise1)
-* [Create an iOS native application](#exercise2)
-* [Extend the iOS App for Azure AD Authentication](#exercise3)
-* [Integrate Microsoft Graph into the Application](#exercise4)
+- [Create an Azure AD native application with the App Registration Portal](#exercise1)
+- [Create an iOS native application](#exercise2)
+- [Extend the iOS App for Azure AD Authentication](#exercise3)
+- [Integrate Microsoft Graph into the Application](#exercise4)
 
 ## Prerequisites
 
 To complete this lab, you need the following:
 
-* Office 365 tenancy
-  * If you do not have one, you obtain one (for free) by signing up to the [Office 365 Developer Program](https://developer.microsoft.com/en-us/office/dev-program).
-* Desktop / laptop running MacOS
-* [XCode v10.1](https://developer.apple.com/xcode/)
-* [Carthage v0.29.0](https://github.com/Carthage/Carthage)
+- Office 365 tenancy
+  - If you do not have one, you obtain one (for free) by signing up to the [Office 365 Developer Program](https://developer.microsoft.com/en-us/office/dev-program).
+- Desktop / laptop running MacOS
+- [XCode v10.2.1](https://developer.apple.com/xcode/)
+- [CocoaPods v1.7.1](https://cocoapods.org/)
 
 <a name="exercise1"></a>
 
 ## Exercise 1: Create an Azure AD native application with the App Registration Portal
 
-In this exercise you will create a new Azure AD native application using the App Registry Portal (ARP).
+In this exercise you will create a new Azure AD native application using the Azure Active Directory admin center.
 
-1. Open a browser and navigate to the **App Registry Portal**: **apps.dev.microsoft.com** and login using a **personal account** (aka: Microsoft Account) or **Work or School Account**.
-1. Select **Add an app** at the top of the page.
-1. On the **Register your application** page, set the **Application Name** to **NativeO365CalendarEvents** and select **Create**.
+1. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com) and login using a **personal account** (aka: Microsoft Account) or **Work or School Account**.
 
-    ![Screenshot of creating a new app in the App Registration Portal website](./Images/arp-create-app-01.png)
+1. Select **Azure Active Directory** in the left-hand navigation, then select **App registrations** under **Manage**.
 
-1. On the **NativeO365CalendarEvents Registration** page, under the **Properties** section, copy the **Application Id** Guid as you will need it later.
+    ![A screenshot of the App registrations ](./images/aad-portal-app-registrations.png)
 
-    ![Screenshot of newly created application's ID](./Images/arp-create-app-02.png)
+1. Select **New registration**. On the **Register an application** page, set the values as follows.
+    - Set **Name** to `Native O365 Calendar Events`.
+    - Set **Supported account types** to **Accounts in any organizational directory and personal Microsoft accounts**.
+    - Leave **Redirect URI** empty.
 
-1. Scroll down to the **Platforms** section.
+    ![A screenshot of the Register an application page](./images/aad-register-an-app.png)
 
-    1. Select **Add Platform**.
-    1. In the **Add Platform** dialog, select **Native Application**.
+1. Choose **Register**.
+1. On the **Android Graph Tutorial** page, copy the value of the **Application (client) ID** and save it, you will need it in the next step.
 
-        ![Screenshot creating a platform for the app](./Images/arp-create-app-03.png)
+    ![A screenshot of the application ID of the new app registration](./images/aad-application-id.png)
 
-    1. After the native application platform is created, copy the **Custom Redirect URIs** as you will need it later.
+1. Select the **Add a Redirect URI** link.
+1. On the **Redirect URIs** page, locate the **Suggested Redirect URIs for public clients (mobile, desktop)** section.
+1. Select the URI that begins with `msal` and copy it, then choose **Save**. Save the copied redirect URI, you will need it in the next step.
 
-        ![Screenshot of the custom application URI for the native application](./Images/arp-create-app-04.png)
+    ![A screenshot of the Redirect URIs page](./images/aad-redirect-uris.png)
 
-        > Unlike application secrets that are only displayed a single time when they are created, the custom redirect URIs are always shown so you can come back and get this string if you need it later.
+1. Select **Manage > API Permissions**.
 
-1. In the **Microsoft Graph Permissions** section, select **Add** next to the **Delegated Permissions** subsection.
+    Select **Add a permission** and select **Microsoft Graph**.
 
-    ![Screenshot of the Add button for adding a delegated permission](./Images/arp-add-permission-01.png)
+    ![Screenshot selecting the Microsoft Graph service](./images/aad-portal-newapp-graphscope.png)
 
-    In the **Select Permission** dialog, locate and select the permission **Calendars.Read** and select **OK**:
+    Select **Delegated Permissions**, expand the **Calendar** group and select **Calendars.Read** scope.
 
-      ![Screenshot of adding the Calendars.Read permission](./Images/arp-add-permission-02.png)
+    ![Screenshot selecting the Microsoft Graph service](./images/aad-portal-newapp-graphscope-01.png)
 
-      ![Screenshot of the newly added Calendars.Read permission](./Images/arp-add-permission-03.png)
-
-1. Scroll to the bottom of the page and select **Save**.
+    Select **Add permissions** to save your changes.
 
 <a name="exercise2"></a>
 
 ## Exercise 2: Create an iOS native application
-
+ 
 In this exercise you will create an iOS application and wire up the different screens.
 
 1. Open XCode.
@@ -74,11 +75,11 @@ In this exercise you will create an iOS application and wire up the different sc
 
     1. Select **Next**.
     1. In the **Choose options for your new project**, enter the following values:
-        * **Product Name**: NativeO365CalendarEvents
-        * **Organization Name**: Microsoft
-        * **Organization Identifier**: com.microsoft.officedev
-        * **Language**: Objective-C
-        * Unselect additional options
+        - **Product Name**: NativeO365CalendarEvents
+        - **Organization Name**: Microsoft
+        - **Organization Identifier**: com.microsoft.officedev
+        - **Language**: Objective-C
+        - Unselect additional options
 
         ![Screenshot of the "Choose options for your new project" dialog in XCode](./Images/xcode-createproj-02.png)
 
@@ -86,12 +87,12 @@ In this exercise you will create an iOS application and wire up the different sc
     1. When prompted, select a location where to create the project on your workstation.
 1. Cleanup the default storyboard
     1. In the **Navigator** panel, select the following files and delete them:
-        * RootViewController.h
-        * RootViewController.m
-        * DataViewController.h
-        * DataViewController.m
-        * ModelController.h
-        * ModelController.m
+        - RootViewController.h
+        - RootViewController.m
+        - DataViewController.h
+        - DataViewController.m
+        - ModelController.h
+        - ModelController.m
     1. In the **Project Manager** panel, select **Main.storyboard**:
 
         ![Screenshot of XCode Project Manager panel](./Images/xcode-createux-01.png)
@@ -116,10 +117,10 @@ In this exercise you will create an iOS application and wire up the different sc
         1. Select **File > New File**.
         1. Select **Cocoa Touch Class** & select **Next**.
         1. In the **Choose options for your new file** dialog, set the following values, creating the file in the project root folder (the same folder where **AppDelegate.h** is located):
-            * **Class**: LoginViewController
-            * **Subclass of**: UIViewController
-            * **Also create XIB file**: unselected
-            * **Language**: Objective-C
+            - **Class**: LoginViewController
+            - **Subclass of**: UIViewController
+            - **Also create XIB file**: unselected
+            - **Language**: Objective-C
         1. Open the **LoginViewController.h** file and add the following properties to the interface `LoginViewController`:
 
             ```objc
@@ -246,9 +247,9 @@ In this exercise you will create an iOS application and wire up the different sc
         ![Screenshot specifying the association between the Navigation Controller and Login View Controller](./Images/xcode-createux-10.png)
 
     1. The storyboard should now display a different flow of view logic so that:
-        * the application will first load from the Navigation Controller
-        * the Navigation Controller will then load the Login View Controller
-        * the Root View Controller is now orphaned... this will be addressed later in the lab.
+        - the application will first load from the Navigation Controller
+        - the Navigation Controller will then load the Login View Controller
+        - the Root View Controller is now orphaned... this will be addressed later in the lab.
 
         ![Screenshot of the new storyboard flow](./Images/xcode-createux-11.png)
 
@@ -269,12 +270,12 @@ At this point you can stop the application in XCode. The user interface is mostl
 
 With the application created, now extend it to support authentication with Azure AD. This is required to obtain the necessary OAuth access token to call the Microsoft Graph. In this exercise you will integrate the Microsoft Authentication Library (MSAL) into the application.
 
-1. If the iOS application is open from a previous session, close it.
-1. Add the MSAL iOS SDK via [Cocoapods](https://cocoapods.org/):
+1. If the XCode application is open from a previous session, close it.
+1. Add the MSAL iOS SDK via CocoaPods:
     1. From a command prompt, go to the root folder for the project:
-    1. Execute `pod init` to initialize Cocoapoads and create a **podfile**.
+    1. Execute `pod init` to initialize CocoaPoads and create a **podfile**.
     1. Open the **Podfile** created in the root of the project folder.
-    1. Add the line `pod 'MSAL', '~> 0.2'` immediately before the closing `end`. The contents of the file should look similar to the following:
+    1. Add the line `pod 'MSAL'` immediately before the closing `end`. The contents of the file should look similar to the following:
 
         ```txt
         # Uncomment the next line to define a global platform for your project
@@ -286,7 +287,7 @@ With the application created, now extend it to support authentication with Azure
 
           # Pods for NativeO365CalendarEvents
 
-          pod 'MSAL', '~> 0.2'
+          pod 'MSAL'
 
         end
         ```
@@ -342,9 +343,9 @@ With the application created, now extend it to support authentication with Azure
     1. Select **File > New File**.
         1. Select **Cocoa Touch Class** and select **Next**.
         1. In the **Choose options for your new file** dialog, set the following values, select **Next** and then select **Create**:
-            * **Class**: AuthenticationManager
-            * **Subclass of**: NSObject
-            * **Language**: Objective-C
+            - **Class**: AuthenticationManager
+            - **Subclass of**: NSObject
+            - **Language**: Objective-C
 
 1. Code the `AuthenticationManager` interface:
     1. Open the **AuthenticationManager.h** file.
@@ -628,10 +629,10 @@ The last exercise is to incorporate the Microsoft Graph into the application. Fo
     1. Select **File > New File**.
         1. Select **Cocoa Touch Class** and select **Next**.
         1. In the **Choose options for your new file** dialog, set the following values, select **Next** and then select **Create**:
-            * **Class**: CalendarTableViewController
-            * **Subclass of**: UITableViewController
-            * **Also create XIB file**: unselected
-            * **Language**: Objective-C
+            - **Class**: CalendarTableViewController
+            - **Subclass of**: UITableViewController
+            - **Also create XIB file**: unselected
+            - **Language**: Objective-C
     1. Open the **CalendarTableViewController.h** file.
         1. Add the following code to the `CalendarTableViewController` interface:
 
@@ -647,30 +648,30 @@ The last exercise is to incorporate the Microsoft Graph into the application. Fo
             ![Screenshot associating the calendar view to the controller](./Images/xcode-graph-01.png)
 
         1. In the **Utilities** panel, within the **Identity** inspector:
-            * Set the **Identity > Storyboard ID** to **calendarList**.
-            * Set the **Document > Label** to **CalendarList**.
+            - Set the **Identity > Storyboard ID** to **calendarList**.
+            - Set the **Document > Label** to **CalendarList**.
     1. In the storyboard designer, select the **CalendarList Scene > CalendarList > Table View > Table View Cell**.
         1. In the **Utilities** panel, within the **Identity** inspector, set the **Document > Label** to **calendarListCell**.
         1. In the **Utilities** panel, within the **Attributes** inspector, set the **Table View Cell > Identifier** to **eventCellTableViewCell**.
 
 1. Implement the user interface for the table cells that will display events.
     1. In the **Utilities** panel, drag two **Label** controls from the **Object** library into the white box for the table view cell.
-        * Place the two tables vertically and left-aligned.
-        * Stretch the width of the labels to go to the right edge of the screen to avoid wrapping.
+        - Place the two tables vertically and left-aligned.
+        - Stretch the width of the labels to go to the right edge of the screen to avoid wrapping.
     1. In the **Utilities** panel, within the **Attributes** inspector, modify the formatting of the two labels as you would like them to appear
 
         ![Screenshot associating the calendar view to the controller](./Images/xcode-graph-02.png)
 
     1. In the **Utilities** panel, within the **Identity** inspector, set the **Document > Label** for the two labels to the following values:
-        * subjectLabel
-        * dateLabel
+        - subjectLabel
+        - dateLabel
     1. In the **Utilities** panel, within the **Attributes** inspector, set the select each of the two labels and set the following properties:
-        * subjectLabel
-            * **Label > Label**: subjectLabel
-            * **View > Tag**: 100
-        * dateLabel
-            * **Label > Label**: dateLabel
-            * **View > Tag**: 200
+        - subjectLabel
+            - **Label > Label**: subjectLabel
+            - **View > Tag**: 100
+        - dateLabel
+            - **Label > Label**: dateLabel
+            - **View > Tag**: 200
 
     1. Open the **CalendarTableViewController.m** file.
     1. Add the following `import` statement after the existing ones:
