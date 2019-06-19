@@ -17,7 +17,7 @@ In this lab you will create an iOS application written in Objective-C using the 
 
 ## Watch the Module
 
-This module has been recorded and is available in the Office Development YouTube channel: [Build iOS native apps with the Microsoft Graph REST API](https://youtu.be/uX6Q4EwDAFI)
+This module has been recorded and is available in the Office Development YouTube channel: [Build iOS native apps with the Microsoft Graph REST API](https://youtu.be/Gg8Qy1Dqyzw)
 
 ## Contributors
 
@@ -28,9 +28,10 @@ This module has been recorded and is available in the Office Development YouTube
 
 ## Version history
 
-| Version | Date               | Comments                                                                                                                             |
+| Version |        Date        |                                                               Comments                                                               |
 | ------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| 1.6     | February 12, 2019  | 2019Q4 content refresh                                                                                                               |
+| 1.7     | June 18, 2019      | Updated readme to refreshed screencast recording                                                                                     |
+| 1.6     | May 12, 2019       | 2019Q4 content refresh                                                                                                               |
 | 1.5     | February 12, 2019  | 2019Q3 content refresh                                                                                                               |
 | 1.4     | November 7, 2018   | 2019Q2 content refresh; Replaced process to use Cocoapods instead of Carthage for including MSAL iOS SDK; updated lab for XCode 10.1 |
 | 1.3     | September 7, 2018  | 2019Q1 content refresh                                                                                                               |
