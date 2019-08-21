@@ -58,3 +58,4 @@ iOSInjectionProject/
 ### Objective-C Patch ###
 
 .vscode/
+AuthSettings.plist

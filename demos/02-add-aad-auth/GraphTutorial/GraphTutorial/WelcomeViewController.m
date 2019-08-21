@@ -7,6 +7,7 @@
 //
 
 #import "WelcomeViewController.h"
+#import "AuthenticationManager.h"
 
 @interface WelcomeViewController ()
 
@@ -27,6 +28,7 @@
 }
 
 - (IBAction)signOut {
+    [AuthenticationManager.instance signOut];
     [self performSegueWithIdentifier: @"userSignedOut" sender: nil];
 }
 
