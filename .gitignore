@@ -56,3 +56,5 @@ fastlane/test_output
 iOSInjectionProject/
 
 ### Objective-C Patch ###
+
+.vscode/

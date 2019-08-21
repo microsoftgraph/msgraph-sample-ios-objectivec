@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  SignInViewController.h
 //  GraphTutorial
 //
 //  Copyright © 2019 Microsoft. All rights reserved.
@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface SignInViewController : UIViewController
 
 
 @end

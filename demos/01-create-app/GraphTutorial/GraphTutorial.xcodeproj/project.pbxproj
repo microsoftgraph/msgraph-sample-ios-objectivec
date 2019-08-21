@@ -3,14 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		26C85AFEF4AD1950A79388AE /* Pods_GraphTutorialUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F38B3B1E7C3E9F439D6BEF7 /* Pods_GraphTutorialUITests.framework */; };
 		53E4734553DC067F956BF842 /* Pods_GraphTutorialTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4426298CFCE83DE267BE14 /* Pods_GraphTutorialTests.framework */; };
+		9633B0E3230C989D00FB21B8 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9633B0E2230C989D00FB21B8 /* WelcomeViewController.m */; };
+		9633B0E6230D7FB800FB21B8 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9633B0E5230D7FB800FB21B8 /* CalendarViewController.m */; };
+		9633B0E9230D860000FB21B8 /* SpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9633B0E8230D860000FB21B8 /* SpinnerViewController.m */; };
 		96B952A4230C8F7A0033ACFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B952A3230C8F7A0033ACFD /* AppDelegate.m */; };
-		96B952A7230C8F7A0033ACFD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B952A6230C8F7A0033ACFD /* ViewController.m */; };
+		96B952A7230C8F7A0033ACFD /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B952A6230C8F7A0033ACFD /* SignInViewController.m */; };
 		96B952AA230C8F7A0033ACFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B952A8230C8F7A0033ACFD /* Main.storyboard */; };
 		96B952AC230C8F7B0033ACFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96B952AB230C8F7B0033ACFD /* Assets.xcassets */; };
 		96B952AF230C8F7B0033ACFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B952AD230C8F7B0033ACFD /* LaunchScreen.storyboard */; };
@@ -45,11 +48,17 @@
 		5C4426298CFCE83DE267BE14 /* Pods_GraphTutorialTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GraphTutorialTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7203283E9378E9B9C9F6DD69 /* Pods-GraphTutorialUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraphTutorialUITests.release.xcconfig"; path = "Target Support Files/Pods-GraphTutorialUITests/Pods-GraphTutorialUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7F38B3B1E7C3E9F439D6BEF7 /* Pods_GraphTutorialUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GraphTutorialUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9633B0E1230C989D00FB21B8 /* WelcomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		9633B0E2230C989D00FB21B8 /* WelcomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		9633B0E4230D7FB800FB21B8 /* CalendarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		9633B0E5230D7FB800FB21B8 /* CalendarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		9633B0E7230D860000FB21B8 /* SpinnerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpinnerViewController.h; sourceTree = "<group>"; };
+		9633B0E8230D860000FB21B8 /* SpinnerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpinnerViewController.m; sourceTree = "<group>"; };
 		96B9529F230C8F7A0033ACFD /* GraphTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B952A2230C8F7A0033ACFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		96B952A3230C8F7A0033ACFD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		96B952A5230C8F7A0033ACFD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		96B952A6230C8F7A0033ACFD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		96B952A5230C8F7A0033ACFD /* SignInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		96B952A6230C8F7A0033ACFD /* SignInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		96B952A9230C8F7A0033ACFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96B952AB230C8F7B0033ACFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96B952AE230C8F7B0033ACFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,7 +112,6 @@
 				029E4F92ABC5F6701A944135 /* Pods-GraphTutorialUITests.debug.xcconfig */,
 				7203283E9378E9B9C9F6DD69 /* Pods-GraphTutorialUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -134,13 +142,19 @@
 			children = (
 				96B952A2230C8F7A0033ACFD /* AppDelegate.h */,
 				96B952A3230C8F7A0033ACFD /* AppDelegate.m */,
-				96B952A5230C8F7A0033ACFD /* ViewController.h */,
-				96B952A6230C8F7A0033ACFD /* ViewController.m */,
+				96B952A5230C8F7A0033ACFD /* SignInViewController.h */,
+				96B952A6230C8F7A0033ACFD /* SignInViewController.m */,
 				96B952A8230C8F7A0033ACFD /* Main.storyboard */,
 				96B952AB230C8F7B0033ACFD /* Assets.xcassets */,
 				96B952AD230C8F7B0033ACFD /* LaunchScreen.storyboard */,
 				96B952B0230C8F7B0033ACFD /* Info.plist */,
 				96B952B1230C8F7B0033ACFD /* main.m */,
+				9633B0E1230C989D00FB21B8 /* WelcomeViewController.h */,
+				9633B0E2230C989D00FB21B8 /* WelcomeViewController.m */,
+				9633B0E4230D7FB800FB21B8 /* CalendarViewController.h */,
+				9633B0E5230D7FB800FB21B8 /* CalendarViewController.m */,
+				9633B0E7230D860000FB21B8 /* SpinnerViewController.h */,
+				9633B0E8230D860000FB21B8 /* SpinnerViewController.m */,
 			);
 			path = GraphTutorial;
 			sourceTree = "<group>";
@@ -393,8 +407,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96B952A7230C8F7A0033ACFD /* ViewController.m in Sources */,
+				96B952A7230C8F7A0033ACFD /* SignInViewController.m in Sources */,
+				9633B0E3230C989D00FB21B8 /* WelcomeViewController.m in Sources */,
+				9633B0E9230D860000FB21B8 /* SpinnerViewController.m in Sources */,
 				96B952B2230C8F7B0033ACFD /* main.m in Sources */,
+				9633B0E6230D7FB800FB21B8 /* CalendarViewController.m in Sources */,
 				96B952A4230C8F7A0033ACFD /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

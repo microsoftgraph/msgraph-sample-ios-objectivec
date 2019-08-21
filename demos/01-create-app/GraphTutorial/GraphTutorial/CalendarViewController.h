@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  CalendarViewController.h
 //  GraphTutorial
 //
 //  Copyright © 2019 Microsoft. All rights reserved.
@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) UIWindow *window;
+@interface CalendarViewController : UIViewController
 
+@property (nonatomic) IBOutlet UITextView *calendarJSON;
 
 @end
 
+NS_ASSUME_NONNULL_END

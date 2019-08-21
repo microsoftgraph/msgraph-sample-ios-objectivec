@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  SpinnerViewController.h
 //  GraphTutorial
 //
 //  Copyright © 2019 Microsoft. All rights reserved.
@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) UIWindow *window;
-
-
+@interface SpinnerViewController : UIViewController
+- (void) startWithContainer:(UIViewController*) container;
+- (void) stop;
 @end
 
+NS_ASSUME_NONNULL_END
