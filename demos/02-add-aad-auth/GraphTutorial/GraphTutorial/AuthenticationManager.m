@@ -2,15 +2,18 @@
 //  AuthenticationManager.m
 //  GraphTutorial
 //
-//  Created by Jason Johnston on 8/21/19.
-//  Copyright © 2019 Jason Johnston. All rights reserved.
+//  Copyright © 2019 Microsoft. All rights reserved.
+//  Licensed under the MIT license. See LICENSE.txt in the project root for license information.
 //
 
 #import "AuthenticationManager.h"
 
 @interface AuthenticationManager()
+
 @property NSString* appId;
 @property NSArray<NSString*>* graphScopes;
+@property MSALPublicClientApplication* publicClient;
+
 @end
 
 @implementation AuthenticationManager
@@ -117,6 +120,13 @@
     for (id account in accounts) {
         [self.publicClient removeAccount:account error:nil];
     }
+}
+
+- (MSALAuthenticationProvider*) getGraphAuthProvider {
+    // Create an MSAL auth provider for use with the Graph client
+    return [[MSALAuthenticationProvider alloc]
+            initWithPublicClientApplication:self.publicClient
+            andScopes:self.graphScopes];
 }
 
 @end

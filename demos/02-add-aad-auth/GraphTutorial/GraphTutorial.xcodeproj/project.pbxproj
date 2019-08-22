@@ -22,6 +22,7 @@
 		96B952C7230C8F7B0033ACFD /* GraphTutorialUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B952C6230C8F7B0033ACFD /* GraphTutorialUITests.m */; };
 		96D5297F230DA77500503108 /* AuthSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96D5297E230DA77500503108 /* AuthSettings.plist */; };
 		96D52986230DB19C00503108 /* AuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D52985230DB19C00503108 /* AuthenticationManager.m */; };
+		96D52989230EC6F400503108 /* GraphManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D52988230EC6F400503108 /* GraphManager.m */; };
 		D3045814D225F090F9D3D915 /* Pods_GraphTutorial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A6E15A207F724950C870CE /* Pods_GraphTutorial.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,8 @@
 		96D5297E230DA77500503108 /* AuthSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AuthSettings.plist; sourceTree = "<group>"; };
 		96D52984230DB19C00503108 /* AuthenticationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationManager.h; sourceTree = "<group>"; };
 		96D52985230DB19C00503108 /* AuthenticationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationManager.m; sourceTree = "<group>"; };
+		96D52987230EC6F400503108 /* GraphManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphManager.h; sourceTree = "<group>"; };
+		96D52988230EC6F400503108 /* GraphManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphManager.m; sourceTree = "<group>"; };
 		AD69BC858AAFE35872598098 /* Pods-GraphTutorialTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraphTutorialTests.release.xcconfig"; path = "Target Support Files/Pods-GraphTutorialTests/Pods-GraphTutorialTests.release.xcconfig"; sourceTree = "<group>"; };
 		E6FBEC1BDB2ECC77E18780AC /* Pods-GraphTutorialTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraphTutorialTests.debug.xcconfig"; path = "Target Support Files/Pods-GraphTutorialTests/Pods-GraphTutorialTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +166,8 @@
 				96D5297E230DA77500503108 /* AuthSettings.plist */,
 				96D52984230DB19C00503108 /* AuthenticationManager.h */,
 				96D52985230DB19C00503108 /* AuthenticationManager.m */,
+				96D52987230EC6F400503108 /* GraphManager.h */,
+				96D52988230EC6F400503108 /* GraphManager.m */,
 			);
 			path = GraphTutorial;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 				96D52986230DB19C00503108 /* AuthenticationManager.m in Sources */,
 				96B952B2230C8F7B0033ACFD /* main.m in Sources */,
 				9633B0E6230D7FB800FB21B8 /* CalendarViewController.m in Sources */,
+				96D52989230EC6F400503108 /* GraphManager.m in Sources */,
 				96B952A4230C8F7A0033ACFD /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
