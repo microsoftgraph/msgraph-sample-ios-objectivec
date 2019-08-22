@@ -9,11 +9,13 @@
 #import "CalendarViewController.h"
 #import "SpinnerViewController.h"
 #import "GraphManager.h"
+#import "CalendarTableViewCell.h"
 #import <MSGraphClientModels/MSGraphClientModels.h>
 
 @interface CalendarViewController ()
 
 @property SpinnerViewController* spinner;
+@property NSArray<MSGraphEvent*>* events;
 
 @end
 
@@ -27,7 +29,7 @@
     [self.spinner startWithContainer:self];
     
     [GraphManager.instance
-     getEventsWithCompletionBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+     getEventsWithCompletionBlock:^(NSArray<MSGraphEvent*> * _Nullable events, NSError * _Nullable error) {
          dispatch_async(dispatch_get_main_queue(), ^{
              [self.spinner stop];
              
@@ -48,11 +50,55 @@
                  return;
              }
              
-             // TEMPORARY
-             self.calendarJSON.text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-             [self.calendarJSON sizeToFit];
+             self.events = events;
+             [self.tableView reloadData];
          });
      }];
+}
+
+- (NSInteger) numberOfSections:(UITableView*) tableView {
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView*) tableView numberOfRowsInSection:(NSInteger) section {
+    return self.events ? self.events.count : 0;
+}
+
+- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CalendarTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell"];
+    
+    // Get the event that corresponds to the row
+    MSGraphEvent* event = self.events[indexPath.row];
+    
+    // Configure the cell
+    cell.subject = event.subject;
+    cell.organizer = event.organizer.emailAddress.name;
+    cell.duration = [NSString stringWithFormat:@"%@ to %@",
+                     [self formatGraphDateTime:event.start],
+                     [self formatGraphDateTime:event.end]];
+    
+    return cell;
+}
+
+- (NSString*) formatGraphDateTime:(MSGraphDateTimeTimeZone*) dateTime {
+    // Create a formatter to parse Graph's date format
+    NSDateFormatter* isoFormatter = [[NSDateFormatter alloc] init];
+    isoFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSSS";
+    
+    NSLog(@"Parsing: %@ - %@", dateTime.dateTime, dateTime.timeZone);
+    
+    // Specify the time zone
+    isoFormatter.timeZone = [[NSTimeZone alloc] initWithName:dateTime.timeZone];
+    
+    NSDate* date = [isoFormatter dateFromString:dateTime.dateTime];
+    
+    // Output like 5/5/2019, 2:00 PM
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.timeStyle = NSDateFormatterShortStyle;
+    
+    NSString* dateString = [dateFormatter stringFromDate:date];
+    return dateString;
 }
 
 @end

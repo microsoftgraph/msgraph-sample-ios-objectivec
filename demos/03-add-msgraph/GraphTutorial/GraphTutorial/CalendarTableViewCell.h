@@ -1,5 +1,5 @@
 //
-//  CalendarViewController.h
+//  CalendarTableViewCell.h
 //  GraphTutorial
 //
 //  Copyright © 2019 Microsoft. All rights reserved.
@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CalendarViewController : UITableViewController
+@interface CalendarTableViewCell : UITableViewCell
+
+@property (nonatomic) NSString* subject;
+@property (nonatomic) NSString* organizer;
+@property (nonatomic) NSString* duration;
 
 @end
 

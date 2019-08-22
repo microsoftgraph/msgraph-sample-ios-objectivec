@@ -94,8 +94,26 @@
              return;
          }
          
-         // TEMPORARY
-         completionBlock(data, nil);
+         NSError* graphError;
+         
+         // Deserialize to an events collection
+         MSCollection* eventsCollection = [[MSCollection alloc] initWithData:data error:&graphError];
+         if (graphError) {
+             completionBlock(nil, graphError);
+             return;
+         }
+         
+         // Create an array to return
+         NSMutableArray* eventsArray = [[NSMutableArray alloc]
+                                        initWithCapacity:eventsCollection.value.count];
+
+         for (id event in eventsCollection.value) {
+             // Deserialize the event and add to the array
+             MSGraphEvent* graphEvent = [[MSGraphEvent alloc] initWithDictionary:event];
+             [eventsArray addObject:graphEvent];
+         }
+         
+         completionBlock(eventsArray, nil);
      }];
     
     // Execute the request
