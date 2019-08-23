@@ -58,7 +58,7 @@ In this section you will create the views for the app: a sign in page, a tab bar
 
 1. Open **SignInViewController.m** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "SignInViewController.h"
 
     @interface SignInViewController ()
@@ -134,7 +134,7 @@ In this section you will create the views for the app: a sign in page, a tab bar
 1. Create a new **Cocoa Touch Class** file in the **GraphTutorial** folder named `WelcomeViewController`. Choose **UIViewController** in the **Subclass of** field.
 1. Open **WelcomeViewController.h** and add the following code inside the `@interface` declaration.
 
-    ```Objective-C
+    ```objc
     @property (nonatomic) IBOutlet UIImageView *userProfilePhoto;
     @property (nonatomic) IBOutlet UILabel *userDisplayName;
     @property (nonatomic) IBOutlet UILabel *userEmail;
@@ -142,7 +142,7 @@ In this section you will create the views for the app: a sign in page, a tab bar
 
 1. Open **WelcomeViewController.m** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "WelcomeViewController.h"
 
     @interface WelcomeViewController ()
@@ -202,13 +202,13 @@ The welcome scene should look similar to this once you're done.
 1. Create a new **Cocoa Touch Class** file in the **GraphTutorial** folder named `CalendarViewController`. Choose **UIViewController** in the **Subclass of** field.
 1. Open **CalendarViewController.h** and add the following code inside the `@interface` declaration.
 
-    ```Objective-C
+    ```objc
     @property (nonatomic) IBOutlet UITextView *calendarJSON;
     ```
 
 1. Open **CalendarViewController.m** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "CalendarViewController.h"
 
     @interface CalendarViewController ()
@@ -245,14 +245,14 @@ The calendar scene should look similar to this once you're done.
 1. Create a new **Cocoa Touch Class** file in the **GraphTutorial** folder named `SpinnerViewController`. Choose **UIViewController** in the **Subclass of** field.
 1. Open **SpinnerViewController.h** and add the following code inside the `@interface` declaration.
 
-    ```Objective-C
+    ```objc
     - (void) startWithContainer:(UIViewController*) container;
     - (void) stop;
     ```
 
 1. Open **SpinnerViewController.m** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "SpinnerViewController.h"
 
     @interface SpinnerViewController ()

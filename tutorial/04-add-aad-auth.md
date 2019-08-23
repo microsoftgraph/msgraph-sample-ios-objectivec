@@ -43,13 +43,13 @@ In this section you will configure the project for MSAL, create an authenticatio
 
 1. Open **AppDelegate.m** and add the following import statement at the top of the file.
 
-    ```Objective-C
+    ```objc
     #import <MSAL/MSAL.h>
     ```
 
 1. Add the following function to the `AppDelegate` class.
 
-    ```Objective-C
+    ```objc
     - (BOOL)application:(UIApplication *)app
                 openURL:(NSURL *)url
                 options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
@@ -64,7 +64,7 @@ In this section you will configure the project for MSAL, create an authenticatio
 1. Create a new **Cocoa Touch Class** in the **GraphTutorial** project named **AuthenticationManager**. Choose **NSObject** in the **Subclass of** field.
 1. Open **AuthenticationManager.h** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import <Foundation/Foundation.h>
     #import <MSAL/MSAL.h>
 
@@ -86,7 +86,7 @@ In this section you will configure the project for MSAL, create an authenticatio
 
 1. Open **AuthenticationManager.m** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "AuthenticationManager.h"
 
     @interface AuthenticationManager()
@@ -210,7 +210,7 @@ In this section you will configure the project for MSAL, create an authenticatio
 
 1. Open the **SignInViewController.m** file and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "SignInViewController.h"
     #import "SpinnerViewController.h"
     #import "AuthenticationManager.h"
@@ -283,7 +283,7 @@ In this section you will configure the project for MSAL, create an authenticatio
 
 1. Open **WelcomeViewController.m** and replace the existing `signOut` function with the following.
 
-    ```Objective-C
+    ```objc
     - (IBAction)signOut {
         [AuthenticationManager.instance signOut];
         [self performSegueWithIdentifier: @"userSignedOut" sender: nil];
@@ -302,19 +302,19 @@ In this section you will create a helper class to hold all of the calls to Micro
 
 1. Open **AuthenticationManager.h** and add the following `#import` statement at the top of the file.
 
-    ```Objective-C
+    ```objc
     #import <MSGraphMSALAuthProvider/MSGraphMSALAuthProvider.h>
     ```
 
 1. Add the following line inside the `@interface` declaration.
 
-    ```Objective-C
+    ```objc
     - (MSALAuthenticationProvider*) getGraphAuthProvider;
     ```
 
 1. Open **AuthenticationManager.m** and add the following function to the `AuthenticationManager` class.
 
-    ```Objective-C
+    ```objc
     - (MSALAuthenticationProvider*) getGraphAuthProvider {
         // Create an MSAL auth provider for use with the Graph client
         return [[MSALAuthenticationProvider alloc]
@@ -326,7 +326,7 @@ In this section you will create a helper class to hold all of the calls to Micro
 1. Create a new **Cocoa Touch Class** in the **GraphTutorial** project named **GraphManager**. Choose **NSObject** in the **Subclass of** field.
 1. Open **GraphManager.h** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import <Foundation/Foundation.h>
     #import <MSGraphClientSDK/MSGraphClientSDK.h>
     #import <MSGraphClientModels/MSGraphClientModels.h>
@@ -348,7 +348,7 @@ In this section you will create a helper class to hold all of the calls to Micro
 
 1. Open **GraphManager.m** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "GraphManager.h"
 
     @interface GraphManager()
@@ -419,7 +419,7 @@ In this section you will create a helper class to hold all of the calls to Micro
 
 1. Open **WelcomeViewController.m** and add the following `#import` statements at the top of the file.
 
-    ```Objective-C
+    ```objc
     #import "SpinnerViewController.h"
     #import "GraphManager.h"
     #import <MSGraphClientModels/MSGraphClientModels.h>
@@ -427,13 +427,13 @@ In this section you will create a helper class to hold all of the calls to Micro
 
 1. Add the following property to the `WelcomeViewController` interface declaration.
 
-    ```Objective-C
+    ```objc
     @property SpinnerViewController* spinner;
     ```
 
 1. Replace the existing `viewDidLoad` with the following code.
 
-    ```Objective-C
+    ```objc
     - (void)viewDidLoad {
         [super viewDidLoad];
         // Do any additional setup after loading the view.

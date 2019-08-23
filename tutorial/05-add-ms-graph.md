@@ -8,7 +8,7 @@ In this section you will extend the `GraphManager` class to add a function to ge
 
 1. Open **GraphManager.h** and add the following code above the `@interface` declaration.
 
-    ```Objective C
+    ```objc
     typedef void (^GetEventsCompletionBlock)(NSData* _Nullable data, NSError* _Nullable error);
     ```
 
