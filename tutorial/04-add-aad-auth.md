@@ -314,7 +314,7 @@ In this section you will create a helper class to hold all of the calls to Micro
 
 1. Open **AuthenticationManager.m** and add the following function to the `AuthenticationManager` class.
 
-    ```Swift
+    ```Objective-C
     - (MSALAuthenticationProvider*) getGraphAuthProvider {
         // Create an MSAL auth provider for use with the Graph client
         return [[MSALAuthenticationProvider alloc]

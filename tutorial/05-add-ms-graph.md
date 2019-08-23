@@ -8,19 +8,19 @@ In this section you will extend the `GraphManager` class to add a function to ge
 
 1. Open **GraphManager.h** and add the following code above the `@interface` declaration.
 
-    ```Objective-C
+    ```Objective C
     typedef void (^GetEventsCompletionBlock)(NSData* _Nullable data, NSError* _Nullable error);
     ```
 
 1. Add the following code to the `@interface` declaration.
 
-    ```Objective-C
+    ```objc
     - (void) getEventsWithCompletionBlock: (GetEventsCompletionBlock)completionBlock;
     ```
 
 1. Open **GraphManager.m** and add the following function to the `GraphManager` class.
 
-    ```Swift
+    ```objc
     - (void) getEventsWithCompletionBlock:(GetEventsCompletionBlock)completionBlock {
         // GET /me/events?$select='subject,organizer,start,end'$orderby=createdDateTime DESC
         NSString* eventsUrlString =
@@ -62,7 +62,7 @@ In this section you will extend the `GraphManager` class to add a function to ge
 
 1. Open **CalendarViewController.m** and replace its entire contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "CalendarViewController.h"
     #import "SpinnerViewController.h"
     #import "GraphManager.h"
@@ -125,13 +125,13 @@ Now you can replace the JSON dump with something to display the results in a use
 
 1. Open **GraphManager.h**. Change the `GetEventsCompletionBlock` type definition to the following.
 
-    ```Objective-C
+    ```objc
     typedef void (^GetEventsCompletionBlock)(NSArray<MSGraphEvent*>* _Nullable events, NSError* _Nullable error);
     ```
 
 1. Open **GraphManager.m**. Replace the `completionBlock(data, nil);` line in the `getEventsWithCompletionBlock` function with the following code.
 
-    ```Objective-C
+    ```objc
     NSError* graphError;
 
     // Deserialize to an events collection
@@ -159,7 +159,7 @@ Now you can replace the JSON dump with something to display the results in a use
 1. Create a new **Cocoa Touch Class** file in the **GraphTutorial** project named `CalendarTableViewCell`. Choose **UITableViewCell** in the **Subclass of** field.
 1. Open **CalendarTableViewCell.h** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import <UIKit/UIKit.h>
 
     NS_ASSUME_NONNULL_BEGIN
@@ -177,7 +177,7 @@ Now you can replace the JSON dump with something to display the results in a use
 
 1. Open **CalendarTableViewCell.m** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "CalendarTableViewCell.h"
 
     @interface CalendarTableViewCell()
@@ -239,13 +239,13 @@ Now you can replace the JSON dump with something to display the results in a use
 1. Open **CalendarViewController.h** and remove the `calendarJSON` property.
 1. Change the `@interface` declaration to the following.
 
-    ```Objective-C
+    ```objc
     @interface CalendarViewController : UITableViewController
     ```
 
 1. Open **CalendarViewController.m** and replace its contents with the following code.
 
-    ```Objective-C
+    ```objc
     #import "WelcomeViewController.h"
     #import "SpinnerViewController.h"
     #import "AuthenticationManager.h"
