@@ -1,19 +1,18 @@
-# Microsoft Graph Training Module - Build iOS native apps with the Microsoft Graph REST API
+# Microsoft Graph Training Module - Build iOS native apps with Objective-C and the Microsoft Graph SDK
 
 This module will introduce you to working with the Microsoft Graph SDK to access data in Office 365 by building native mobile iOS applications with Objective-C.
 
-## Lab - Build iOS native apps with the Microsoft Graph REST API
+## Lab - Build iOS native apps with Objective-C and the Microsoft Graph SDK
 
 In this lab you will create an iOS application written in Objective-C using the Azure AD v2 authentication endpoint and the Microsoft Authentication Library (MSAL) to access data in Office 365 using the Microsoft Graph REST API.
 
-- [Lab manual](./Lab.md)
+- [iOS Objective-C Microsoft Graph tutorial](https://docs.microsoft.com/graph/tutorials/ios-objectivec)
 
 ## Demos
 
-- [Create an Azure AD native application with the App Registration Portal](./Demos/01-arp-app)
-- [Create an iOS native application](./Demos/02-create-app)
-- [Extend the iOS App for Azure AD Authentication](./Demos/03-add-aad-auth)
-- [Integrate Microsoft Graph into the Application](./Demos/04-add-msgraph)
+- [01-create-app](demos/01-create-app): Completed [Create an iOS Objective-C app](https://docs.microsoft.com/graph/tutorials/ios-objectivec?tutorial-step=1)
+- [02-add-aad-auth](demos/02-add-aad-auth): Completed [Add Azure AD authentication](https://docs.microsoft.com/graph/tutorials/ios-objectivec?tutorial-step=3)
+- [03-add-msgraph](demos/03-add-msgraph): Completed [Get calendar data](https://docs.microsoft.com/graph/tutorials/ios-objectivec?tutorial-step=4)
 
 ## Watch the Module
 
@@ -30,6 +29,7 @@ This module has been recorded and is available in the Office Development YouTube
 
 | Version |        Date        |                                                               Comments                                                               |
 | ------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 1.8     | August 23, 2019    | Revised training for onboarding to docs.microsoft.com                                                                                |
 | 1.7     | June 18, 2019      | Updated readme to refreshed screencast recording                                                                                     |
 | 1.6     | May 12, 2019       | 2019Q4 content refresh                                                                                                               |
 | 1.5     | February 12, 2019  | 2019Q3 content refresh                                                                                                               |
@@ -42,5 +42,7 @@ This module has been recorded and is available in the Office Development YouTube
 ## Disclaimer
 
 **THIS CODE IS PROVIDED _AS IS_ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 <img src="https://telemetry.sharepointpnp.com/msgraph-training-ios-objectivec" />

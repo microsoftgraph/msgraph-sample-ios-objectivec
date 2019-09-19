@@ -56,3 +56,7 @@ fastlane/test_output
 iOSInjectionProject/
 
 ### Objective-C Patch ###
+
+.vscode/
+AuthSettings.plist
+ObjectiveCQuickStart.zip
