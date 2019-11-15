@@ -33,25 +33,30 @@
         // Get app ID and scopes from AuthSettings.plist
         NSString* authConfigPath =
         [NSBundle.mainBundle pathForResource:@"AuthSettings" ofType:@"plist"];
-        NSString* bundleId = NSBundle.mainBundle.bundleIdentifier;
         NSDictionary* authConfig = [NSDictionary dictionaryWithContentsOfFile:authConfigPath];
         
         self.appId = authConfig[@"AppId"];
         self.graphScopes = authConfig[@"GraphScopes"];
         
         // Create the MSAL client
-        self.publicClient = [[MSALPublicClientApplication alloc] initWithClientId:self.appId
-                                                                    keychainGroup:bundleId
-                                                                            error:nil];
+        self.publicClient = [[MSALPublicClientApplication alloc] initWithClientId:self.appId error:nil];
     }
     
     return self;
 }
 
-- (void) getTokenInteractivelyWithCompletionBlock:(GetTokenCompletionBlock)completionBlock {
+- (void) getAccessTokenForProviderOptions:(id<MSAuthenticationProviderOptions>)authProviderOptions andCompletion:(void (^)(NSString * _Nonnull, NSError * _Nonnull))completion {
+    [self getTokenSilentlyWithCompletionBlock:completion];
+}
+
+- (void) getTokenInteractivelyWithParentView:(UIViewController *)parentView andCompletionBlock:(GetTokenCompletionBlock)completionBlock {
+    MSALWebviewParameters* webParameters = [[MSALWebviewParameters alloc] initWithParentViewController:parentView];
+    MSALInteractiveTokenParameters* interactiveParameters =
+    [[MSALInteractiveTokenParameters alloc]initWithScopes:self.graphScopes webviewParameters:webParameters];
+    
     // Call acquireToken to open a browser so the user can sign in
     [self.publicClient
-     acquireTokenForScopes:self.graphScopes
+     acquireTokenWithParameters:interactiveParameters
      completionBlock:^(MSALResult * _Nullable result, NSError * _Nullable error) {
         
         // Check error
@@ -85,9 +90,12 @@
         return;
     }
     
+    MSALSilentTokenParameters* silentParameters = [[MSALSilentTokenParameters alloc] initWithScopes:self.graphScopes
+                                                                                            account:account];
+    
     // Attempt to get token silently
     [self.publicClient
-     acquireTokenSilentForScopes:self.graphScopes account:account
+     acquireTokenSilentWithParameters:silentParameters
      completionBlock:^(MSALResult * _Nullable result, NSError * _Nullable error) {
          // Check error
          if (error) {
@@ -120,13 +128,6 @@
     for (id account in accounts) {
         [self.publicClient removeAccount:account error:nil];
     }
-}
-
-- (MSALAuthenticationProvider*) getGraphAuthProvider {
-    // Create an MSAL auth provider for use with the Graph client
-    return [[MSALAuthenticationProvider alloc]
-            initWithPublicClientApplication:self.publicClient
-            andScopes:self.graphScopes];
 }
 
 @end
