@@ -46,7 +46,8 @@
     [self.spinner startWithContainer:self];
     
     [AuthenticationManager.instance
-     getTokenInteractivelyWithCompletionBlock:^(NSString * _Nullable accessToken, NSError * _Nullable error) {
+     getTokenInteractivelyWithParentView:self
+     andCompletionBlock:^(NSString * _Nullable accessToken, NSError * _Nullable error) {
          dispatch_async(dispatch_get_main_queue(), ^{
              [self.spinner stop];
              

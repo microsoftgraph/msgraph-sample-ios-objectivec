@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SignInViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GnS-Cs-7Ko">
-                                <rect key="frame" x="183.5" y="406" width="47" height="30"/>
+                                <rect key="frame" x="183.5" y="433" width="47" height="30"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
                                     <action selector="signIn" destination="BYZ-38-t0r" eventType="touchUpInside" id="q36-Sf-iZo"/>
@@ -139,7 +139,7 @@
                         <outlet property="userDisplayName" destination="0e9-Oz-6jX" id="Ff2-wl-1tt"/>
                         <outlet property="userEmail" destination="Qqx-8R-2Xf" id="Onh-kI-gJK"/>
                         <outlet property="userProfilePhoto" destination="mYY-nJ-rg5" id="DbO-7h-tDH"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="userSignedOut" id="Kcm-9Q-902"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="userSignedOut" modalPresentationStyle="fullScreen" id="Kcm-9Q-902"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYR-Pm-GiU" userLabel="First Responder" sceneMemberID="firstResponder"/>
