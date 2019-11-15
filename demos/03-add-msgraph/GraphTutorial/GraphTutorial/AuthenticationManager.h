@@ -8,19 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import <MSAL/MSAL.h>
-#import <MSGraphMSALAuthProvider/MSGraphMSALAuthProvider.h>
+#import <MSGraphClientSDK/MSGraphClientSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^GetTokenCompletionBlock)(NSString* _Nullable accessToken, NSError* _Nullable error);
 
-@interface AuthenticationManager : NSObject
+@interface AuthenticationManager : NSObject<MSAuthenticationProvider>
 
 + (id) instance;
-- (void) getTokenInteractivelyWithCompletionBlock: (GetTokenCompletionBlock)completionBlock;
+- (void) getTokenInteractivelyWithParentView: (UIViewController*) parentView andCompletionBlock: (GetTokenCompletionBlock)completionBlock;
 - (void) getTokenSilentlyWithCompletionBlock: (GetTokenCompletionBlock)completionBlock;
 - (void) signOut;
-- (MSALAuthenticationProvider*) getGraphAuthProvider;
+- (void) getAccessTokenForProviderOptions:(id<MSAuthenticationProviderOptions>)authProviderOptions andCompletion:(void (^)(NSString *, NSError *))completion;
 
 @end
 

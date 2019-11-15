@@ -28,13 +28,9 @@
 
 - (id) init {
     if (self = [super init]) {
-        
-        MSALAuthenticationProvider* authProvider =
-        [AuthenticationManager.instance getGraphAuthProvider];
-        
         // Create the Graph client
         self.graphClient = [MSClientFactory
-                            createHTTPClientWithAuthenticationProvider:authProvider];
+                            createHTTPClientWithAuthenticationProvider:AuthenticationManager.instance];
     }
     
     return self;

@@ -58,6 +58,7 @@
 		9633B0E5230D7FB800FB21B8 /* CalendarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		9633B0E7230D860000FB21B8 /* SpinnerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpinnerViewController.h; sourceTree = "<group>"; };
 		9633B0E8230D860000FB21B8 /* SpinnerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpinnerViewController.m; sourceTree = "<group>"; };
+		965B5BCA237F48FE002DC529 /* GraphTutorial.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GraphTutorial.entitlements; sourceTree = "<group>"; };
 		96B9529F230C8F7A0033ACFD /* GraphTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B952A2230C8F7A0033ACFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		96B952A3230C8F7A0033ACFD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -151,6 +152,7 @@
 		96B952A1230C8F7A0033ACFD /* GraphTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				965B5BCA237F48FE002DC529 /* GraphTutorial.entitlements */,
 				96B952A2230C8F7A0033ACFD /* AppDelegate.h */,
 				96B952A3230C8F7A0033ACFD /* AppDelegate.m */,
 				96B952A5230C8F7A0033ACFD /* SignInViewController.h */,
@@ -606,6 +608,7 @@
 			baseConfigurationReference = 1FD6041DC84C46FAD2A87A23 /* Pods-GraphTutorial.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GraphTutorial/GraphTutorial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 627WDN8ZS4;
 				INFOPLIST_FILE = GraphTutorial/Info.plist;
@@ -624,6 +627,7 @@
 			baseConfigurationReference = 10056737C7131311A85A2C20 /* Pods-GraphTutorial.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GraphTutorial/GraphTutorial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 627WDN8ZS4;
 				INFOPLIST_FILE = GraphTutorial/Info.plist;
