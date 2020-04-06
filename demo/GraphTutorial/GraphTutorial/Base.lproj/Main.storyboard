@@ -42,47 +42,59 @@
         <scene sceneID="f8T-59-m9G">
             <objects>
                 <viewController id="zl7-NJ-euo" customClass="CalendarViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="he1-mE-F6I">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Gh5-h8-D46">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xX-YJ-BVk">
-                                <rect key="frame" x="20" y="44" width="374" height="769"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vbR-p8-VL6">
-                                        <rect key="frame" x="8" y="8" width="358" height="761"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="vbR-p8-VL6" firstAttribute="leading" secondItem="2xX-YJ-BVk" secondAttribute="leadingMargin" id="5Av-14-de6"/>
-                                    <constraint firstAttribute="bottom" secondItem="vbR-p8-VL6" secondAttribute="bottom" id="dau-0l-Mqr"/>
-                                    <constraint firstItem="vbR-p8-VL6" firstAttribute="top" secondItem="2xX-YJ-BVk" secondAttribute="topMargin" id="kKe-V8-8vk"/>
-                                    <constraint firstItem="vbR-p8-VL6" firstAttribute="centerX" secondItem="2xX-YJ-BVk" secondAttribute="centerX" id="lll-Zn-rfa"/>
-                                    <constraint firstItem="vbR-p8-VL6" firstAttribute="bottom" secondItem="4fz-DU-par" secondAttribute="bottom" id="mSe-nB-86O"/>
-                                    <constraint firstItem="vbR-p8-VL6" firstAttribute="trailing" secondItem="2xX-YJ-BVk" secondAttribute="trailingMargin" id="z2l-J0-7yr"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="Mq4-Iu-M8b"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="4fz-DU-par"/>
-                            </scrollView>
-                        </subviews>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="2xX-YJ-BVk" firstAttribute="leading" secondItem="he1-mE-F6I" secondAttribute="leadingMargin" id="HDk-ys-50b"/>
-                            <constraint firstItem="2xX-YJ-BVk" firstAttribute="trailing" secondItem="he1-mE-F6I" secondAttribute="trailingMargin" id="Hdo-ly-gBS"/>
-                            <constraint firstItem="2xX-YJ-BVk" firstAttribute="top" secondItem="q3d-wS-ocb" secondAttribute="top" id="aLo-lU-gh8"/>
-                            <constraint firstItem="2xX-YJ-BVk" firstAttribute="bottom" secondItem="q3d-wS-ocb" secondAttribute="bottom" id="qIB-gb-m8e"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="q3d-wS-ocb"/>
-                    </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EventCell" rowHeight="98" id="gf4-UB-jW2" customClass="CalendarTableViewCell">
+                                <rect key="frame" x="0.0" y="28" width="414" height="98"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gf4-UB-jW2" id="dId-gQ-jyr">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVu-Kh-Gep">
+                                            <rect key="frame" x="20" y="11" width="374" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Organizer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Be0-wq-z86">
+                                            <rect key="frame" x="20" y="40" width="374" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3q-3w-7Wd">
+                                            <rect key="frame" x="20" y="63" width="374" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Be0-wq-z86" secondAttribute="trailing" id="82W-qc-NVy"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="bVu-Kh-Gep" secondAttribute="trailing" id="KYK-sc-gmD"/>
+                                        <constraint firstItem="bVu-Kh-Gep" firstAttribute="top" secondItem="dId-gQ-jyr" secondAttribute="topMargin" id="M5Y-2v-dtl"/>
+                                        <constraint firstItem="b3q-3w-7Wd" firstAttribute="leading" secondItem="dId-gQ-jyr" secondAttribute="leadingMargin" id="POu-EJ-Pbq"/>
+                                        <constraint firstItem="Be0-wq-z86" firstAttribute="top" secondItem="bVu-Kh-Gep" secondAttribute="bottom" constant="8" symbolic="YES" id="Qxp-R5-sNg"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="b3q-3w-7Wd" secondAttribute="trailing" id="bmx-aB-BtN"/>
+                                        <constraint firstItem="bVu-Kh-Gep" firstAttribute="leading" secondItem="dId-gQ-jyr" secondAttribute="leadingMargin" id="fgH-qN-tL7"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="b3q-3w-7Wd" secondAttribute="bottom" constant="8" id="iyg-Ka-1Tx"/>
+                                        <constraint firstItem="b3q-3w-7Wd" firstAttribute="top" secondItem="Be0-wq-z86" secondAttribute="bottom" constant="8" symbolic="YES" id="ker-PJ-ZZg"/>
+                                        <constraint firstItem="Be0-wq-z86" firstAttribute="leading" secondItem="dId-gQ-jyr" secondAttribute="leadingMargin" id="yr7-4E-7P7"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="durationLabel" destination="b3q-3w-7Wd" id="hqS-ES-rRx"/>
+                                    <outlet property="organizerLabel" destination="Be0-wq-z86" id="9T7-Nf-4Dp"/>
+                                    <outlet property="subjectLabel" destination="bVu-Kh-Gep" id="CS5-Nq-oVP"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
                     <tabBarItem key="tabBarItem" title="Calendar" id="09G-xe-VsO"/>
-                    <connections>
-                        <outlet property="calendarJSON" destination="vbR-p8-VL6" id="bff-Jh-8Up"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Yp-cj-Md7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

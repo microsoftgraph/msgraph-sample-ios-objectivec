@@ -10,9 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CalendarViewController : UIViewController
-
-@property (nonatomic) IBOutlet UITextView *calendarJSON;
+@interface CalendarViewController : UITableViewController
 
 @end
 

@@ -67,4 +67,55 @@
     [meDataTask execute];
 }
 
+// <GetEventsSnippet>
+- (void) getEventsWithCompletionBlock:(GetEventsCompletionBlock)completionBlock {
+    // GET /me/events?$select='subject,organizer,start,end'$orderby=createdDateTime DESC
+    NSString* eventsUrlString =
+    [NSString stringWithFormat:@"%@/me/events?%@&%@",
+     MSGraphBaseURL,
+     // Only return these fields in results
+     @"$select=subject,organizer,start,end",
+     // Sort results by when they were created, newest first
+     @"$orderby=createdDateTime+DESC"];
+
+    NSURL* eventsUrl = [[NSURL alloc] initWithString:eventsUrlString];
+    NSMutableURLRequest* eventsRequest = [[NSMutableURLRequest alloc] initWithURL:eventsUrl];
+
+    MSURLSessionDataTask* eventsDataTask =
+    [[MSURLSessionDataTask alloc]
+     initWithRequest:eventsRequest
+     client:self.graphClient
+     completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+         if (error) {
+             completionBlock(nil, error);
+             return;
+         }
+
+         NSError* graphError;
+
+         // Deserialize to an events collection
+         MSCollection* eventsCollection = [[MSCollection alloc] initWithData:data error:&graphError];
+         if (graphError) {
+             completionBlock(nil, graphError);
+             return;
+         }
+
+         // Create an array to return
+         NSMutableArray* eventsArray = [[NSMutableArray alloc]
+                                     initWithCapacity:eventsCollection.value.count];
+
+         for (id event in eventsCollection.value) {
+             // Deserialize the event and add to the array
+             MSGraphEvent* graphEvent = [[MSGraphEvent alloc] initWithDictionary:event];
+             [eventsArray addObject:graphEvent];
+         }
+
+         completionBlock(eventsArray, nil);
+     }];
+
+    // Execute the request
+    [eventsDataTask execute];
+}
+// </GetEventsSnippet>
+
 @end

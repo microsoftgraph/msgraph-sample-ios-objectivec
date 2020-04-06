@@ -100,6 +100,7 @@ In this section you will create a helper class to hold all of the calls to Micro
     #import <Foundation/Foundation.h>
     #import <MSGraphClientSDK/MSGraphClientSDK.h>
     #import <MSGraphClientModels/MSGraphClientModels.h>
+    #import <MSGraphClientModels/MSCollection.h>
     #import "AuthenticationManager.h"
 
     NS_ASSUME_NONNULL_BEGIN
