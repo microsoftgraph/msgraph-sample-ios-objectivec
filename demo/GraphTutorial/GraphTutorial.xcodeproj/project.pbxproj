@@ -21,6 +21,9 @@
 		96E8B6A6243BB86000C2947B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E8B6A5243BB86000C2947B /* WelcomeViewController.m */; };
 		96E8B6A9243BBB6000C2947B /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E8B6A8243BBB6000C2947B /* CalendarViewController.m */; };
 		96E8B6AC243BBCD800C2947B /* SpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E8B6AB243BBCD800C2947B /* SpinnerViewController.m */; };
+		96E8B6AE243BC4E200C2947B /* AuthSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96E8B6AD243BC4E200C2947B /* AuthSettings.plist */; };
+		96E8B6B2243BC68C00C2947B /* AuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E8B6B1243BC68C00C2947B /* AuthenticationManager.m */; };
+		96E8B6B5243BCA2300C2947B /* GraphManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E8B6B4243BCA2300C2947B /* GraphManager.m */; };
 		F555A1BD7CA665AEB506565F /* Pods_GraphTutorial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F31D5D04F6F62EFF72B1EEB0 /* Pods_GraphTutorial.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +74,12 @@
 		96E8B6A8243BBB6000C2947B /* CalendarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		96E8B6AA243BBCD800C2947B /* SpinnerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpinnerViewController.h; sourceTree = "<group>"; };
 		96E8B6AB243BBCD800C2947B /* SpinnerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpinnerViewController.m; sourceTree = "<group>"; };
+		96E8B6AD243BC4E200C2947B /* AuthSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AuthSettings.plist; sourceTree = "<group>"; };
+		96E8B6AF243BC59A00C2947B /* GraphTutorial.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GraphTutorial.entitlements; sourceTree = "<group>"; };
+		96E8B6B0243BC68C00C2947B /* AuthenticationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationManager.h; sourceTree = "<group>"; };
+		96E8B6B1243BC68C00C2947B /* AuthenticationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationManager.m; sourceTree = "<group>"; };
+		96E8B6B3243BCA2300C2947B /* GraphManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphManager.h; sourceTree = "<group>"; };
+		96E8B6B4243BCA2300C2947B /* GraphManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphManager.m; sourceTree = "<group>"; };
 		D2F473940EC292203C8FC21F /* Pods-GraphTutorial-GraphTutorialUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraphTutorial-GraphTutorialUITests.release.xcconfig"; path = "Target Support Files/Pods-GraphTutorial-GraphTutorialUITests/Pods-GraphTutorial-GraphTutorialUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DFF88FF5FFE24A30F8E73A13 /* Pods-GraphTutorial-GraphTutorialUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraphTutorial-GraphTutorialUITests.debug.xcconfig"; path = "Target Support Files/Pods-GraphTutorial-GraphTutorialUITests/Pods-GraphTutorial-GraphTutorialUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB72A42E8FA20BDE83A67934 /* Pods_GraphTutorial_GraphTutorialUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GraphTutorial_GraphTutorialUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,21 +164,27 @@
 			children = (
 				960D10F7243BB1CD00F396A9 /* AppDelegate.h */,
 				960D10F8243BB1CD00F396A9 /* AppDelegate.m */,
+				960D1103243BB1CF00F396A9 /* Assets.xcassets */,
+				96E8B6B0243BC68C00C2947B /* AuthenticationManager.h */,
+				96E8B6B1243BC68C00C2947B /* AuthenticationManager.m */,
+				96E8B6AD243BC4E200C2947B /* AuthSettings.plist */,
+				96E8B6A7243BBB6000C2947B /* CalendarViewController.h */,
+				96E8B6A8243BBB6000C2947B /* CalendarViewController.m */,
+				96E8B6B3243BCA2300C2947B /* GraphManager.h */,
+				96E8B6B4243BCA2300C2947B /* GraphManager.m */,
+				96E8B6AF243BC59A00C2947B /* GraphTutorial.entitlements */,
+				960D1108243BB1CF00F396A9 /* Info.plist */,
+				960D1105243BB1CF00F396A9 /* LaunchScreen.storyboard */,
+				960D1109243BB1CF00F396A9 /* main.m */,
+				960D1100243BB1CD00F396A9 /* Main.storyboard */,
 				960D10FA243BB1CD00F396A9 /* SceneDelegate.h */,
 				960D10FB243BB1CD00F396A9 /* SceneDelegate.m */,
 				960D10FD243BB1CD00F396A9 /* SignInViewController.h */,
 				960D10FE243BB1CD00F396A9 /* SignInViewController.m */,
-				960D1100243BB1CD00F396A9 /* Main.storyboard */,
-				960D1103243BB1CF00F396A9 /* Assets.xcassets */,
-				960D1105243BB1CF00F396A9 /* LaunchScreen.storyboard */,
-				960D1108243BB1CF00F396A9 /* Info.plist */,
-				960D1109243BB1CF00F396A9 /* main.m */,
-				96E8B6A4243BB86000C2947B /* WelcomeViewController.h */,
-				96E8B6A5243BB86000C2947B /* WelcomeViewController.m */,
-				96E8B6A7243BBB6000C2947B /* CalendarViewController.h */,
-				96E8B6A8243BBB6000C2947B /* CalendarViewController.m */,
 				96E8B6AA243BBCD800C2947B /* SpinnerViewController.h */,
 				96E8B6AB243BBCD800C2947B /* SpinnerViewController.m */,
+				96E8B6A4243BB86000C2947B /* WelcomeViewController.h */,
+				96E8B6A5243BB86000C2947B /* WelcomeViewController.m */,
 			);
 			path = GraphTutorial;
 			sourceTree = "<group>";
@@ -303,6 +318,7 @@
 				960D1107243BB1CF00F396A9 /* LaunchScreen.storyboard in Resources */,
 				960D1104243BB1CF00F396A9 /* Assets.xcassets in Resources */,
 				960D1102243BB1CD00F396A9 /* Main.storyboard in Resources */,
+				96E8B6AE243BC4E200C2947B /* AuthSettings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,9 +448,11 @@
 			files = (
 				96E8B6A6243BB86000C2947B /* WelcomeViewController.m in Sources */,
 				960D10FF243BB1CD00F396A9 /* SignInViewController.m in Sources */,
+				96E8B6B5243BCA2300C2947B /* GraphManager.m in Sources */,
 				960D10F9243BB1CD00F396A9 /* AppDelegate.m in Sources */,
 				960D110A243BB1CF00F396A9 /* main.m in Sources */,
 				96E8B6AC243BBCD800C2947B /* SpinnerViewController.m in Sources */,
+				96E8B6B2243BC68C00C2947B /* AuthenticationManager.m in Sources */,
 				96E8B6A9243BBB6000C2947B /* CalendarViewController.m in Sources */,
 				960D10FC243BB1CD00F396A9 /* SceneDelegate.m in Sources */,
 			);
@@ -606,6 +624,7 @@
 			baseConfigurationReference = 629F279BED63740E107134D7 /* Pods-GraphTutorial.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GraphTutorial/GraphTutorial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 627WDN8ZS4;
 				INFOPLIST_FILE = GraphTutorial/Info.plist;
@@ -624,6 +643,7 @@
 			baseConfigurationReference = 3E86355710DD841E036FB87D /* Pods-GraphTutorial.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GraphTutorial/GraphTutorial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 627WDN8ZS4;
 				INFOPLIST_FILE = GraphTutorial/Info.plist;
