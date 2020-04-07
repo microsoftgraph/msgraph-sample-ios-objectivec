@@ -6,6 +6,7 @@
 //  Licensed under the MIT license. See LICENSE.txt in the project root for license information.
 //
 
+// <AuthManagerSnippet>
 #import "AuthenticationManager.h"
 
 @interface AuthenticationManager()
@@ -131,3 +132,4 @@
 }
 
 @end
+// </AuthManagerSnippet>
