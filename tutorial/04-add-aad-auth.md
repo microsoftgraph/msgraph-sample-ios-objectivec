@@ -48,40 +48,40 @@ In this section you will configure the project for MSAL, create an authenticatio
 
 1. Open **AppDelegate.m** and add the following import statement at the top of the file.
 
-    ```objectivec
+    ```objc
     #import <MSAL/MSAL.h>
     ```
 
 1. Add the following function to the `AppDelegate` class.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/AppDelegate.m" id="HandleMsalResponseSnippet":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/AppDelegate.m" id="HandleMsalResponseSnippet":::
 
 ### Create authentication manager
 
 1. Create a new **Cocoa Touch Class** in the **GraphTutorial** project named **AuthenticationManager**. Choose **NSObject** in the **Subclass of** field.
 1. Open **AuthenticationManager.h** and replace its contents with the following code.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/AuthenticationManager.h" id="AuthManagerSnippet":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/AuthenticationManager.h" id="AuthManagerSnippet":::
 
 1. Open **AuthenticationManager.m** and replace its contents with the following code.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/AuthenticationManager.m" id="AuthManagerSnippet":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/AuthenticationManager.m" id="AuthManagerSnippet":::
 
 ### Add sign-in and sign-out
 
 1. Open the **SignInViewController.m** file and replace its contents with the following code.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/SignInViewController.m" id="SignInViewSnippet":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/SignInViewController.m" id="SignInViewSnippet":::
 
 1. Open **WelcomeViewController.m** and add the following `import` statement to the top of the file.
 
-    ```objectivec
+    ```objc
     #import "AuthenticationManager.h"
     ```
 
 1. Replace the existing `signOut` function with the following.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/WelcomeViewController.m" id="SignOutSnippet":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/WelcomeViewController.m" id="SignOutSnippet":::
 
 1. Save your changes and restart the application in Simulator.
 
@@ -96,7 +96,7 @@ In this section you will create a helper class to hold all of the calls to Micro
 1. Create a new **Cocoa Touch Class** in the **GraphTutorial** project named **GraphManager**. Choose **NSObject** in the **Subclass of** field.
 1. Open **GraphManager.h** and replace its contents with the following code.
 
-    ```objectivec
+    ```objc
     #import <Foundation/Foundation.h>
     #import <MSGraphClientSDK/MSGraphClientSDK.h>
     #import <MSGraphClientModels/MSGraphClientModels.h>
@@ -119,7 +119,7 @@ In this section you will create a helper class to hold all of the calls to Micro
 
 1. Open **GraphManager.m** and replace its contents with the following code.
 
-    ```objectivec
+    ```objc
     #import "GraphManager.h"
 
     @interface GraphManager()
@@ -186,7 +186,7 @@ In this section you will create a helper class to hold all of the calls to Micro
 
 1. Open **WelcomeViewController.m** and add the following `#import` statements at the top of the file.
 
-    ```objectivec
+    ```objc
     #import "SpinnerViewController.h"
     #import "GraphManager.h"
     #import <MSGraphClientModels/MSGraphClientModels.h>
@@ -194,12 +194,12 @@ In this section you will create a helper class to hold all of the calls to Micro
 
 1. Add the following property to the `WelcomeViewController` interface declaration.
 
-    ```objectivec
+    ```objc
     @property SpinnerViewController* spinner;
     ```
 
 1. Replace the existing `viewDidLoad` with the following code.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/WelcomeViewController.m" id="ViewDidLoadSnippet":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/WelcomeViewController.m" id="ViewDidLoadSnippet":::
 
 If you save your changes and restart the app now, after sign-in the UI is updated with the user's display name and email address.

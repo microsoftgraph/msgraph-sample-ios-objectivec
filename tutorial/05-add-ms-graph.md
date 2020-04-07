@@ -8,19 +8,19 @@ In this section you will extend the `GraphManager` class to add a function to ge
 
 1. Open **GraphManager.h** and add the following code above the `@interface` declaration.
 
-    ```objectivec
+    ```objc
     typedef void (^GetEventsCompletionBlock)(NSData* _Nullable data, NSError* _Nullable error);
     ```
 
 1. Add the following code to the `@interface` declaration.
 
-    ```objectivec
+    ```objc
     - (void) getEventsWithCompletionBlock: (GetEventsCompletionBlock)completionBlock;
     ```
 
 1. Open **GraphManager.m** and add the following function to the `GraphManager` class.
 
-    ```objectivec
+    ```objc
     - (void) getEventsWithCompletionBlock:(GetEventsCompletionBlock)completionBlock {
         // GET /me/events?$select='subject,organizer,start,end'$orderby=createdDateTime DESC
         NSString* eventsUrlString =
@@ -62,7 +62,7 @@ In this section you will extend the `GraphManager` class to add a function to ge
 
 1. Open **CalendarViewController.m** and replace its entire contents with the following code.
 
-    ```objectivec
+    ```objc
     #import "CalendarViewController.h"
     #import "SpinnerViewController.h"
     #import "GraphManager.h"
@@ -125,24 +125,24 @@ Now you can replace the JSON dump with something to display the results in a use
 
 1. Open **GraphManager.h**. Change the `GetEventsCompletionBlock` type definition to the following.
 
-    ```objectivec
+    ```objc
     typedef void (^GetEventsCompletionBlock)(NSArray<MSGraphEvent*>* _Nullable events, NSError* _Nullable error);
     ```
 
 1. Open **GraphManager.m**. Replace the `completionBlock(data, nil);` line in the `getEventsWithCompletionBlock` function with the following code.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/GraphManager.m" id="GetEventsSnippet" highlight="24-43":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/GraphManager.m" id="GetEventsSnippet" highlight="24-43":::
 
 ### Update CalendarViewController
 
 1. Create a new **Cocoa Touch Class** file in the **GraphTutorial** project named `CalendarTableViewCell`. Choose **UITableViewCell** in the **Subclass of** field.
 1. Open **CalendarTableViewCell.h** and replace its contents with the following code.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/CalendarTableViewCell.h" id="CalendarTableCellSnippet":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/CalendarTableViewCell.h" id="CalendarTableCellSnippet":::
 
 1. Open **CalendarTableViewCell.m** and replace its contents with the following code.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/CalendarTableViewCell.m" id="CalendarTableCellSnippet":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/CalendarTableViewCell.m" id="CalendarTableCellSnippet":::
 
 1. Open **Main.storyboard** and locate the **Calendar Scene**. Select the **View** in the **Calendar Scene** and delete it.
 
@@ -178,13 +178,13 @@ Now you can replace the JSON dump with something to display the results in a use
 1. Open **CalendarViewController.h** and remove the `calendarJSON` property.
 1. Change the `@interface` declaration to the following.
 
-    ```objectivec
+    ```objc
     @interface CalendarViewController : UITableViewController
     ```
 
 1. Open **CalendarViewController.m** and replace its contents with the following code.
 
-    :::code language="objectivec" source="../demo/GraphTutorial/GraphTutorial/CalendarViewController.m" id="CalendarViewSnippet":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/CalendarViewController.m" id="CalendarViewSnippet":::
 
 1. Run the app, sign in, and tap the **Calendar** tab. You should see the list of events.
 
