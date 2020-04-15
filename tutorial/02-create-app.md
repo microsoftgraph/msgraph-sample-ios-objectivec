@@ -30,7 +30,7 @@ Before moving on, install some additional dependencies that you will use later.
 1. Open the Podfile and add the following lines just after the `use_frameworks!` line.
 
     ```Ruby
-    pod 'MSAL', '~> 1.0.2'
+    pod 'MSAL', '~> 1.1.1'
     pod 'MSGraphClientSDK', ' ~> 1.0.0'
     pod 'MSGraphClientModels', '~> 1.3.0'
     ```
@@ -97,12 +97,14 @@ In this section you will create the views for the app: a sign in page, a tab bar
 
     ![A screenshot of the Title field in the Attributes Inspector in Xcode](./images/set-button-title.png)
 
+1. With the button selected, select the **Align** button at the bottom of the storyboard. Select both the **Horizontally in container** and **Vertically in container** constraints, leave their values as 0, then select **Add 2 constraints**.
+
+    ![A screenshot of the alignment constraints settings in Xcode](./images/add-alignment-constraints.png)
+
 1. Select the **Sign In View Controller**, then select the **Connections Inspector**.
 1. Under **Received Actions**, drag the unfilled circle next to **signIn** onto the button. Select **Touch Up Inside** on the pop-up menu.
 
     ![A screenshot of dragging the signIn action to the button in Xcode](./images/connect-sign-in-button.png)
-
-1. On the **Editor** menu, select **Resolve Auto Layout Issues**, then select **Add Missing Constraints** underneath **All Views in Sign In View Controller**.
 
 ### Create tab bar
 
@@ -175,18 +177,45 @@ In this section you will create the views for the app: a sign in page, a tab bar
     - Two **Labels**
     - One **Button**
 
-1. Select the image view, then select the **Size Inspector**.
-1. Set the **Width** and **Height** to 196.
-1. Select the second label, then select the **Attributes Inspector**.
-1. Change the **Color** to **Dark Gray Color**, and change the **Font** to **System 12.0**.
-1. Select the button, then select the **Attributes Inspector**.
-1. Change the **Title** to `Sign Out`.
 1. Using the **Connections Inspector**, make the following connections.
 
     - Link the **userDisplayName** outlet to the first label.
     - Link the **userEmail** outlet to the second label.
     - Link the **userProfilePhoto** outlet to the image view.
     - Link the **signOut** received action to the button's **Touch Up Inside**.
+
+1. Select the image view, then select the **Size Inspector**.
+1. Set the **Width** and **Height** to 196.
+1. Use the **Align** button to add the **Horizontally in container** constraint with a value of 0.
+1. Use the **Add New Constraints** button (next to the **Align** button) to add the following constraints:
+
+    - Align Top to: Safe Area, value: 0
+    - Bottom Space to: User Display Name, value: Standard
+    - Height, value: 196
+    - Width, value: 196
+
+    ![A screenshot of the new constraints settings in Xcode](./images/add-new-constraints.png)
+
+1. Select the first label, then use the **Align** button to add the **Horizontally in container** constraint with a value of 0.
+1. Use the **Add New Constraints** button to add the following constraints:
+
+    - Top Space to: User Profile Photo, value: Standard
+    - Bottom Space to: User Email, value: Standard
+
+1. Select the second label, then select the **Attributes Inspector**.
+1. Change the **Color** to **Dark Gray Color**, and change the **Font** to **System 12.0**.
+1. Use the **Align** button to add the **Horizontally in container** constraint with a value of 0.
+1. Use the **Add New Constraints** button to add the following constraints:
+
+    - Top Space to: User Display Name, value: Standard
+    - Bottom Space to: Sign Out, value: 14
+
+1. Select the button, then select the **Attributes Inspector**.
+1. Change the **Title** to `Sign Out`.
+1. Use the **Align** button to add the **Horizontally in container** constraint with a value of 0.
+1. Use the **Add New Constraints** button to add the following constraints:
+
+    - Top Space to: User Email, value: 14
 
 1. Select the tab bar item at the bottom of the scene, then select the **Attributes Inspector**. Change the **Title** to `Me`.
 1. On the **Editor** menu, select **Resolve Auto Layout Issues**, then select **Add Missing Constraints** underneath **All Views in Welcome View Controller**.
@@ -231,7 +260,7 @@ The welcome scene should look similar to this once you're done.
 1. Using the **Library**, add a **Text View** to the **Item 2 Scene**.
 1. Select the text view you just added. On the **Editor**, choose **Embed In**, then **Scroll View**.
 1. Using the **Connections Inspector**, connect the **calendarJSON** outlet to the text view.
-1. 1. Select the tab bar item at the bottom of the scene, then select the **Attributes Inspector**. Change the **Title** to `Calendar`.
+1. Select the tab bar item at the bottom of the scene, then select the **Attributes Inspector**. Change the **Title** to `Calendar`.
 1. On the **Editor** menu, select **Resolve Auto Layout Issues**, then select **Add Missing Constraints** underneath **All Views in Welcome View Controller**.
 
 The calendar scene should look similar to this once you're done.
@@ -250,46 +279,7 @@ The calendar scene should look similar to this once you're done.
 
 1. Open **SpinnerViewController.m** and replace its contents with the following code.
 
-    ```objc
-    #import "SpinnerViewController.h"
-
-    @interface SpinnerViewController ()
-    @property (nonatomic) UIActivityIndicatorView* spinner;
-    @end
-
-    @implementation SpinnerViewController
-
-    - (void)viewDidLoad {
-        [super viewDidLoad];
-
-        _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
-                    UIActivityIndicatorViewStyleWhiteLarge];
-
-        self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
-        [self.view addSubview:_spinner];
-
-        _spinner.translatesAutoresizingMaskIntoConstraints = false;
-        [_spinner startAnimating];
-
-        [_spinner.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
-        [_spinner.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
-    }
-
-    - (void) startWithContainer:(UIViewController *)container {
-        [container addChildViewController:self];
-        self.view.frame = container.view.frame;
-        [container.view addSubview:self.view];
-        [self didMoveToParentViewController:container];
-    }
-
-    - (void) stop {
-        [self willMoveToParentViewController:nil];
-        [self.view removeFromSuperview];
-        [self removeFromParentViewController];
-    }
-
-    @end
-    ```
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/SpinnerViewController.m" id="SpinnerViewSnippet":::
 
 ## Test the app
 

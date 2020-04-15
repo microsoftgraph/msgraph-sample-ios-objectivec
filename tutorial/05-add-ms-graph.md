@@ -115,7 +115,7 @@ In this section you will extend the `GraphManager` class to add a function to ge
     @end
     ```
 
-You can now run the app, sign in, and tap the **Calendar** navigation item in the menu. You should see a JSON dump of the events in the app.
+1. Run the app, sign in, and tap the **Calendar** navigation item in the menu. You should see a JSON dump of the events in the app.
 
 ## Display the results
 
@@ -131,96 +131,18 @@ Now you can replace the JSON dump with something to display the results in a use
 
 1. Open **GraphManager.m**. Replace the `completionBlock(data, nil);` line in the `getEventsWithCompletionBlock` function with the following code.
 
-    ```objc
-    NSError* graphError;
-
-    // Deserialize to an events collection
-    MSCollection* eventsCollection = [[MSCollection alloc] initWithData:data error:&graphError];
-    if (graphError) {
-        completionBlock(nil, graphError);
-        return;
-    }
-
-    // Create an array to return
-    NSMutableArray* eventsArray = [[NSMutableArray alloc]
-                                initWithCapacity:eventsCollection.value.count];
-
-    for (id event in eventsCollection.value) {
-        // Deserialize the event and add to the array
-        MSGraphEvent* graphEvent = [[MSGraphEvent alloc] initWithDictionary:event];
-        [eventsArray addObject:graphEvent];
-    }
-
-    completionBlock(eventsArray, nil);
-    ```
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/GraphManager.m" id="GetEventsSnippet" highlight="24-43":::
 
 ### Update CalendarViewController
 
 1. Create a new **Cocoa Touch Class** file in the **GraphTutorial** project named `CalendarTableViewCell`. Choose **UITableViewCell** in the **Subclass of** field.
 1. Open **CalendarTableViewCell.h** and replace its contents with the following code.
 
-    ```objc
-    #import <UIKit/UIKit.h>
-
-    NS_ASSUME_NONNULL_BEGIN
-
-    @interface CalendarTableViewCell : UITableViewCell
-
-    @property (nonatomic) NSString* subject;
-    @property (nonatomic) NSString* organizer;
-    @property (nonatomic) NSString* duration;
-
-    @end
-
-    NS_ASSUME_NONNULL_END
-    ```
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/CalendarTableViewCell.h" id="CalendarTableCellSnippet":::
 
 1. Open **CalendarTableViewCell.m** and replace its contents with the following code.
 
-    ```objc
-    #import "CalendarTableViewCell.h"
-
-    @interface CalendarTableViewCell()
-
-    @property (nonatomic) IBOutlet UILabel *subjectLabel;
-    @property (nonatomic) IBOutlet UILabel *organizerLabel;
-    @property (nonatomic) IBOutlet UILabel *durationLabel;
-
-    @end
-
-    @implementation CalendarTableViewCell
-
-    - (void)awakeFromNib {
-        [super awakeFromNib];
-        // Initialization code
-    }
-
-    - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-        [super setSelected:selected animated:animated];
-
-        // Configure the view for the selected state
-    }
-
-    - (void) setSubject:(NSString *)subject {
-        _subject = subject;
-        self.subjectLabel.text = subject;
-        [self.subjectLabel sizeToFit];
-    }
-
-    - (void) setOrganizer:(NSString *)organizer {
-        _organizer = organizer;
-        self.organizerLabel.text = organizer;
-        [self.organizerLabel sizeToFit];
-    }
-
-    - (void) setDuration:(NSString *)duration {
-        _duration = duration;
-        self.durationLabel.text = duration;
-        [self.durationLabel sizeToFit];
-    }
-
-    @end
-    ```
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/CalendarTableViewCell.m" id="CalendarTableCellSnippet":::
 
 1. Open **Main.storyboard** and locate the **Calendar Scene**. Select the **View** in the **Calendar Scene** and delete it.
 
@@ -231,8 +153,25 @@ Now you can replace the JSON dump with something to display the results in a use
 1. Use the **Library** to add three **Labels** to the prototype cell.
 1. Select the prototype cell, then select the **Identity Inspector**. Change **Class** to **CalendarTableViewCell**.
 1. Select the **Attributes Inspector** and set **Identifier** to `EventCell`.
-1. On the **Editor** menu, select **Resolve Auto Layout Issues**, then select **Add Missing Constraints** underneath **All Views in Welcome View Controller**.
 1. With the **EventCell** selected, select the **Connections Inspector** and connect `durationLabel`, `organizerLabel`, and `subjectLabel` to the labels you added to the cell on the storyboard.
+1. Set the properties and constraints on the three labels as follows.
+
+    - **Subject Label**
+        - Add constraint: Leading space to Content View Leading Margin, value: 0
+        - Add constraint: Trailing space to Content View Trailing Margin, value: 0
+        - Add constraint: Top space to Content View Top Margin, value: 0
+    - **Organizer Label**
+        - Font: System 12.0
+        - Add constraint: Leading space to Content View Leading Margin, value: 0
+        - Add constraint: Trailing space to Content View Trailing Margin, value: 0
+        - Add constraint: Top space to Subject Label Bottom, value: Standard
+    - **Duration Label**
+        - Font: System 12.0
+        - Color: Dark Gray Color
+        - Add constraint: Leading space to Content View Leading Margin, value: 0
+        - Add constraint: Trailing space to Content View Trailing Margin, value: 0
+        - Add constraint: Top space to Organizer Label Bottom, value: Standard
+        - Add constraint: Bottom space to Content View Bottom Margin, value: 8
 
     ![A screenshot of the prototype cell layout](./images/prototype-cell-layout.png)
 
@@ -245,71 +184,7 @@ Now you can replace the JSON dump with something to display the results in a use
 
 1. Open **CalendarViewController.m** and replace its contents with the following code.
 
-    ```objc
-    #import "WelcomeViewController.h"
-    #import "SpinnerViewController.h"
-    #import "AuthenticationManager.h"
-    #import "GraphManager.h"
-    #import <MSGraphClientModels/MSGraphClientModels.h>
-
-    @interface WelcomeViewController ()
-
-    @property SpinnerViewController* spinner;
-
-    @end
-
-    @implementation WelcomeViewController
-
-    - (void)viewDidLoad {
-        [super viewDidLoad];
-        // Do any additional setup after loading the view.
-
-        self.spinner = [SpinnerViewController alloc];
-        [self.spinner startWithContainer:self];
-
-        self.userProfilePhoto.image = [UIImage imageNamed:@"DefaultUserPhoto"];
-
-        [GraphManager.instance
-         getMeWithCompletionBlock:^(MSGraphUser * _Nullable user, NSError * _Nullable error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.spinner stop];
-
-                if (error) {
-                    // Show the error
-                    UIAlertController* alert = [UIAlertController
-                                                alertControllerWithTitle:@"Error getting user profile"
-                                                message:error.debugDescription
-                                                preferredStyle:UIAlertControllerStyleAlert];
-
-                    UIAlertAction* okButton = [UIAlertAction
-                                               actionWithTitle:@"OK"
-                                               style:UIAlertActionStyleDefault
-                                               handler:nil];
-
-                    [alert addAction:okButton];
-                    [self presentViewController:alert animated:true completion:nil];
-                    return;
-                }
-
-                // Set display name
-                self.userDisplayName.text = user.displayName ? : @"Mysterious Stranger";
-                [self.userDisplayName sizeToFit];
-
-                // AAD users have email in the mail attribute
-                // Personal accounts have email in the userPrincipalName attribute
-                self.userEmail.text = user.mail ? : user.userPrincipalName;
-                [self.userEmail sizeToFit];
-            });
-         }];
-    }
-
-    - (IBAction)signOut {
-        [AuthenticationManager.instance signOut];
-        [self performSegueWithIdentifier: @"userSignedOut" sender: nil];
-    }
-
-    @end
-    ```
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/CalendarViewController.m" id="CalendarViewSnippet":::
 
 1. Run the app, sign in, and tap the **Calendar** tab. You should see the list of events.
 
