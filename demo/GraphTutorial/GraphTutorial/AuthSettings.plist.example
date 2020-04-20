@@ -10,7 +10,7 @@
 <plist version="1.0">
     <dict>
         <key>AppId</key>
-        <string>90912e64-801a-4041-9058-c65b2e738f67</string>
+        <string>YOUR_APP_ID_HERE</string>
         <key>GraphScopes</key>
         <array>
             <string>User.Read</string>
