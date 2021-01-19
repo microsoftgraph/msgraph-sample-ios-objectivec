@@ -1,9 +1,9 @@
 <!-- markdownlint-disable MD002 MD041 -->
 
-Begin by creating a new Swift project.
+Begin by creating a new Objective-C project.
 
 1. Open Xcode. On the **File** menu, select **New**, then **Project**.
-1. Choose the **Single View App** template and select **Next**.
+1. Choose the **App** template and select **Next**.
 
     ![A screenshot of the Xcode template selection dialog](./images/xcode-select-template.png)
 
@@ -30,7 +30,7 @@ Before moving on, install some additional dependencies that you will use later.
 1. Open the Podfile and add the following lines just after the `use_frameworks!` line.
 
     ```Ruby
-    pod 'MSAL', '~> 1.1.1'
+    pod 'MSAL', '~> 1.1.13'
     pod 'MSGraphClientSDK', ' ~> 1.0.0'
     pod 'MSGraphClientModels', '~> 1.3.0'
     ```
@@ -125,7 +125,7 @@ In this section you will create the views for the app: a sign in page, a tab bar
 ### Create welcome page
 
 1. Select the **Assets.xcassets** file.
-1. On the **Editor** menu, select **Add Assets**, then **New Image Set**.
+1. On the **Editor** menu, select **Add New Asset**, then **Image Set**.
 1. Select the new **Image** asset and use the **Attribute Inspector** to set its **Name** to `DefaultUserPhoto`.
 1. Add any image you like to serve as a default user profile photo.
 
