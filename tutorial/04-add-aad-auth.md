@@ -8,7 +8,7 @@ In this exercise you will extend the application from the previous exercise to s
     | Key | Type | Value |
     |-----|------|-------|
     | `AppId` | String | The application ID from the Azure portal |
-    | `GraphScopes` | Array | Two String values: `User.Read` and `Calendars.Read` |
+    | `GraphScopes` | Array | Three String values: `User.Read`, `MailboxSettings.Read`, and `Calendars.ReadWrite` |
 
     ![A screenshot of the AuthSettings.plist file in Xcode](./images/auth-settings.png)
 
