@@ -152,7 +152,9 @@ In this section you will create a helper class to hold all of the calls to Micro
 
     - (void) getMeWithCompletionBlock:(GetMeCompletionBlock)completionBlock {
         // GET /me
-        NSString* meUrlString = [NSString stringWithFormat:@"%@/me", MSGraphBaseURL];
+        NSString* meUrlString = [NSString stringWithFormat:@"%@/me?%@",
+                                 MSGraphBaseURL,
+                                 @"$select=displayName,mail,mailboxSettings,userPrincipalName"];
         NSURL* meUrl = [[NSURL alloc] initWithString:meUrlString];
         NSMutableURLRequest* meRequest = [[NSMutableURLRequest alloc] initWithURL:meUrl];
 
