@@ -110,7 +110,7 @@ In this section you will create a helper class to hold all of the calls to Micro
     @interface GraphManager : NSObject
 
     + (id) instance;
-    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock)completionBlock;
+    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock)completion;
 
     @end
 
@@ -150,7 +150,7 @@ In this section you will create a helper class to hold all of the calls to Micro
         return self;
     }
 
-    - (void) getMeWithCompletionBlock:(GetMeCompletionBlock)completionBlock {
+    - (void) getMeWithCompletionBlock:(GetMeCompletionBlock)completion {
         // GET /me
         NSString* meUrlString = [NSString stringWithFormat:@"%@/me?%@",
                                  MSGraphBaseURL,
@@ -164,7 +164,7 @@ In this section you will create a helper class to hold all of the calls to Micro
             client:self.graphClient
             completion:^(NSData *data, NSURLResponse *response, NSError *error) {
                 if (error) {
-                    completionBlock(nil, error);
+                    completion(nil, error);
                     return;
                 }
 
@@ -173,9 +173,9 @@ In this section you will create a helper class to hold all of the calls to Micro
                 MSGraphUser* user = [[MSGraphUser alloc] initWithData:data error:&graphError];
 
                 if (graphError) {
-                    completionBlock(nil, graphError);
+                    completion(nil, graphError);
                 } else {
-                    completionBlock(user, nil);
+                    completion(user, nil);
                 }
             }];
 
