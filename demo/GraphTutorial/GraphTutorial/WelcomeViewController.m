@@ -3,7 +3,7 @@
 //  GraphTutorial
 //
 //  Copyright (c) Microsoft. All rights reserved.
-//  Licensed under the MIT license. See LICENSE.txt in the project root for license information.
+//  Licensed under the MIT license.
 //
 
 #import "WelcomeViewController.h"
@@ -60,8 +60,11 @@
             // Personal accounts have email in the userPrincipalName attribute
             self.userEmail.text = user.mail ? : user.userPrincipalName;
             [self.userEmail sizeToFit];
+            
+            // Save user time zone
+            [GraphManager.instance setGraphTimeZone:(user.mailboxSettings.timeZone ? : @"UTC")];
         });
-     }];
+    }];
 }
 // </ViewDidLoadSnippet>
 

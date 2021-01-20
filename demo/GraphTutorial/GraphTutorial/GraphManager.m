@@ -3,7 +3,7 @@
 //  GraphTutorial
 //
 //  Copyright (c) Microsoft. All rights reserved.
-//  Licensed under the MIT license. See LICENSE.txt in the project root for license information.
+//  Licensed under the MIT license.
 //
 
 #import "GraphManager.h"
@@ -36,9 +36,11 @@
     return self;
 }
 
-- (void) getMeWithCompletionBlock:(GetMeCompletionBlock)completionBlock {
+- (void) getMeWithCompletionBlock:(GetMeCompletionBlock)completion {
     // GET /me
-    NSString* meUrlString = [NSString stringWithFormat:@"%@/me", MSGraphBaseURL];
+    NSString* meUrlString = [NSString stringWithFormat:@"%@/me?%@",
+                             MSGraphBaseURL,
+                             @"$select=displayName,mail,mailboxSettings,userPrincipalName"];
     NSURL* meUrl = [[NSURL alloc] initWithString:meUrlString];
     NSMutableURLRequest* meRequest = [[NSMutableURLRequest alloc] initWithURL:meUrl];
 
@@ -48,7 +50,7 @@
         client:self.graphClient
         completion:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error) {
-                completionBlock(nil, error);
+                completion(nil, error);
                 return;
             }
 
@@ -57,9 +59,9 @@
             MSGraphUser* user = [[MSGraphUser alloc] initWithData:data error:&graphError];
 
             if (graphError) {
-                completionBlock(nil, graphError);
+                completion(nil, graphError);
             } else {
-                completionBlock(user, nil);
+                completion(user, nil);
             }
         }];
 
@@ -67,19 +69,35 @@
     [meDataTask execute];
 }
 
-// <GetEventsSnippet>
-- (void) getEventsWithCompletionBlock:(GetEventsCompletionBlock)completionBlock {
-    // GET /me/events?$select='subject,organizer,start,end'$orderby=createdDateTime DESC
+// <GetCalendarViewSnippet>
+- (void) getCalendarViewStartingAt:(NSString *)viewStart endingAt:(NSString *)viewEnd withCompletionBlock:(GetCalendarViewCompletionBlock)completion {
+    // Set calendar view start and end parameters
+    NSString* viewStartEndString =
+    [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",
+     viewStart,
+     viewEnd];
+    
+    // GET /me/calendarview
     NSString* eventsUrlString =
-    [NSString stringWithFormat:@"%@/me/events?%@&%@",
+    [NSString stringWithFormat:@"%@/me/calendarview?%@&%@&%@&%@",
      MSGraphBaseURL,
+     viewStartEndString,
      // Only return these fields in results
      @"$select=subject,organizer,start,end",
-     // Sort results by when they were created, newest first
-     @"$orderby=createdDateTime+DESC"];
+     // Sort results by start time
+     @"$orderby=start/dateTime",
+     // Request at most 25 results
+     @"$top=25"];
 
     NSURL* eventsUrl = [[NSURL alloc] initWithString:eventsUrlString];
     NSMutableURLRequest* eventsRequest = [[NSMutableURLRequest alloc] initWithURL:eventsUrl];
+    
+    // Add the Prefer: outlook.timezone header to get start and end times
+    // in user's time zone
+    NSString* preferHeader =
+    [NSString stringWithFormat:@"outlook.timezone=\"%@\"",
+     self.graphTimeZone];
+    [eventsRequest addValue:preferHeader forHTTPHeaderField:@"Prefer"];
 
     MSURLSessionDataTask* eventsDataTask =
     [[MSURLSessionDataTask alloc]
@@ -87,16 +105,16 @@
      client:self.graphClient
      completion:^(NSData *data, NSURLResponse *response, NSError *error) {
          if (error) {
-             completionBlock(nil, error);
+             completion(nil, error);
              return;
          }
 
-         NSError* graphError;
+        NSError* graphError;
 
          // Deserialize to an events collection
          MSCollection* eventsCollection = [[MSCollection alloc] initWithData:data error:&graphError];
          if (graphError) {
-             completionBlock(nil, graphError);
+             completion(nil, graphError);
              return;
          }
 
@@ -110,12 +128,12 @@
              [eventsArray addObject:graphEvent];
          }
 
-         completionBlock(eventsArray, nil);
+         completion(eventsArray, nil);
      }];
 
     // Execute the request
     [eventsDataTask execute];
 }
-// </GetEventsSnippet>
+// </GetCalendarViewSnippet>
 
 @end

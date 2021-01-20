@@ -88,6 +88,8 @@ In this section you will extend the `GraphManager` class to add a function to ge
 
     :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/GraphToIana.m" id="GraphToIanaSnippet":::
 
+    This does a simple lookup to find an IANA time zone identifier based on the time zone name returned by Microsoft Graph.
+
 1. Open **CalendarViewController.m** and replace its entire contents with the following code.
 
     ```objc
