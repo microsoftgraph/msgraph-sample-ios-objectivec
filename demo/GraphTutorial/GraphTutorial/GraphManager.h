@@ -30,6 +30,12 @@ typedef void (^CreateEventCompletionBlock)(MSGraphEvent* _Nullable event,
 - (void) getCalendarViewStartingAt: (NSString*) viewStart
                           endingAt: (NSString*) viewEnd
                withCompletionBlock: (GetCalendarViewCompletionBlock) completion;
+- (void) createEventWithSubject: (NSString*) subject
+                       andStart: (NSDate*) start
+                         andEnd: (NSDate*) end
+                   andAttendees: (NSArray<NSString*>* _Nullable) attendees
+                        andBody: (NSString* _Nullable) body
+             andCompletionBlock: (CreateEventCompletionBlock) completion;
 
 @end
 

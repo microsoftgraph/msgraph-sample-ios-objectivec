@@ -19,6 +19,7 @@
 		960F69F825B7820B0096A20A /* GraphToIana.m in Sources */ = {isa = PBXBuildFile; fileRef = 960F69F725B7820B0096A20A /* GraphToIana.m */; };
 		960F69FE25B78C440096A20A /* CalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960F69FD25B78C440096A20A /* CalendarTableViewController.m */; };
 		960F6A0425B78E6B0096A20A /* CalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 960F6A0325B78E6B0096A20A /* CalendarTableViewCell.m */; };
+		960F6A0A25B8879A0096A20A /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960F6A0925B8879A0096A20A /* NewEventViewController.m */; };
 		9632728625B752CC007F1705 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9632728525B752CC007F1705 /* AppDelegate.m */; };
 		9632728925B752CC007F1705 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9632728825B752CC007F1705 /* SceneDelegate.m */; };
 		9632728C25B752CC007F1705 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9632728B25B752CC007F1705 /* SignInViewController.m */; };
@@ -73,6 +74,8 @@
 		960F69FD25B78C440096A20A /* CalendarTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewController.m; sourceTree = "<group>"; };
 		960F6A0225B78E6B0096A20A /* CalendarTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewCell.h; sourceTree = "<group>"; };
 		960F6A0325B78E6B0096A20A /* CalendarTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewCell.m; sourceTree = "<group>"; };
+		960F6A0825B8879A0096A20A /* NewEventViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewEventViewController.h; sourceTree = "<group>"; };
+		960F6A0925B8879A0096A20A /* NewEventViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewEventViewController.m; sourceTree = "<group>"; };
 		9632728125B752CC007F1705 /* GraphTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9632728425B752CC007F1705 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9632728525B752CC007F1705 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				960F69FD25B78C440096A20A /* CalendarTableViewController.m */,
 				960F6A0225B78E6B0096A20A /* CalendarTableViewCell.h */,
 				960F6A0325B78E6B0096A20A /* CalendarTableViewCell.m */,
+				960F6A0825B8879A0096A20A /* NewEventViewController.h */,
+				960F6A0925B8879A0096A20A /* NewEventViewController.m */,
 			);
 			path = GraphTutorial;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 				9632728C25B752CC007F1705 /* SignInViewController.m in Sources */,
 				960F6A0425B78E6B0096A20A /* CalendarTableViewCell.m in Sources */,
 				960F69F225B761AF0096A20A /* GraphManager.m in Sources */,
+				960F6A0A25B8879A0096A20A /* NewEventViewController.m in Sources */,
 				9632728625B752CC007F1705 /* AppDelegate.m in Sources */,
 				9632729725B752D0007F1705 /* main.m in Sources */,
 				960F69FE25B78C440096A20A /* CalendarTableViewController.m in Sources */,

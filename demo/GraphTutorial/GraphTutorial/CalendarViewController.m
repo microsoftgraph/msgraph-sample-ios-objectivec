@@ -93,5 +93,9 @@
     }
 }
 
+- (IBAction) showNewEventForm {
+    [self performSegueWithIdentifier:@"showEventForm" sender:nil];
+}
+
 @end
 // </CalendarViewControllerSnippet>

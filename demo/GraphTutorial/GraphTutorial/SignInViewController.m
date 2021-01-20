@@ -43,7 +43,6 @@
 }
 
 - (IBAction)signIn {
-    self.spinner = [SpinnerViewController alloc];
     [self.spinner startWithContainer:self];
 
     [AuthenticationManager.instance

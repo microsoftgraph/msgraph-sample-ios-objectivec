@@ -138,4 +138,102 @@
 }
 // </GetCalendarViewSnippet>
 
+// <CreateEventSnippet>
+- (void) createEventWithSubject: (NSString*) subject
+                       andStart: (NSDate*) start
+                         andEnd: (NSDate*) end
+                   andAttendees: (NSArray<NSString*>* _Nullable) attendees
+                        andBody: (NSString* _Nullable) body
+             andCompletionBlock: (CreateEventCompletionBlock) completion {
+    NSDateFormatter* isoFormatter = [[NSDateFormatter alloc] init];
+    isoFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm";
+    
+    // Create a dictionary to represent the event
+    // Current version of the Graph SDK models don't serialize properly
+    // see https://github.com/microsoftgraph/msgraph-sdk-objc-models/issues/27
+    NSMutableDictionary* eventDict = [NSMutableDictionary dictionary];
+    
+    [eventDict setObject:subject forKey:@"subject"];
+    
+    NSDictionary* startDict = @{
+        @"dateTime": [isoFormatter stringFromDate:start],
+        @"timeZone": self.graphTimeZone
+    };
+    [eventDict setObject:startDict forKey:@"start"];
+    
+    NSDictionary* endDict = @{
+        @"dateTime": [isoFormatter stringFromDate:end],
+        @"timeZone": self.graphTimeZone
+    };
+    [eventDict setObject:endDict forKey:@"end"];
+    
+    if (attendees != nil && attendees.count > 0) {
+        NSMutableArray* attendeeArray = [NSMutableArray array];
+        
+        for (id email in attendees) {
+            NSDictionary* attendeeDict = @{
+                @"type": @"required",
+                @"emailAddress": @{
+                    @"address": email
+                }
+            };
+            
+            [attendeeArray addObject:attendeeDict];
+        }
+        
+        [eventDict setObject:attendeeArray forKey:@"attendees"];
+    }
+    
+    if (body != nil) {
+        NSDictionary* bodyDict = @{
+            @"content": body,
+            @"contentType": @"text"
+        };
+        
+        [eventDict setObject:bodyDict forKey:@"body"];
+    }
+    
+    NSError* error = nil;
+    NSData* eventData = [NSJSONSerialization dataWithJSONObject:eventDict
+                                                        options:kNilOptions
+                                                          error:&error];
+    
+    // Prepare Graph request
+    NSString* eventsUrlString =
+    [NSString stringWithFormat:@"%@/me/events", MSGraphBaseURL];
+    NSURL* eventsUrl = [[NSURL alloc] initWithString:eventsUrlString];
+    NSMutableURLRequest* eventsRequest = [[NSMutableURLRequest alloc] initWithURL:eventsUrl];
+    
+    eventsRequest.HTTPMethod = @"POST";
+    eventsRequest.HTTPBody = eventData;
+    [eventsRequest addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    MSURLSessionDataTask* createEventDataTask =
+    [[MSURLSessionDataTask alloc]
+     initWithRequest:eventsRequest
+     client:self.graphClient
+     completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+
+        NSError* graphError;
+
+        // Deserialize to an event
+        MSGraphEvent* event = [[MSGraphEvent alloc] initWithData:data
+                                                           error:&graphError];
+        if (graphError) {
+            completion(nil, graphError);
+            return;
+        }
+
+        completion(event, nil);
+    }];
+
+    // Execute the request
+    [createEventDataTask execute];
+}
+// </CreateEventSnippet>
+
 @end
