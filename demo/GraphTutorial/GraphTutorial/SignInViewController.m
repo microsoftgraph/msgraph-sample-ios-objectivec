@@ -1,9 +1,9 @@
 //
-//  ViewController.m
+//  SignInViewController.m
 //  GraphTutorial
 //
 //  Copyright (c) Microsoft. All rights reserved.
-//  Licensed under the MIT license. See LICENSE.txt in the project root for license information.
+//  Licensed under the MIT license.
 //
 
 // <SignInViewSnippet>
@@ -43,7 +43,6 @@
 }
 
 - (IBAction)signIn {
-    self.spinner = [SpinnerViewController alloc];
     [self.spinner startWithContainer:self];
 
     [AuthenticationManager.instance

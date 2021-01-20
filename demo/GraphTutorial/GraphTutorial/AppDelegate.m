@@ -3,7 +3,7 @@
 //  GraphTutorial
 //
 //  Copyright (c) Microsoft. All rights reserved.
-//  Licensed under the MIT license. See LICENSE.txt in the project root for license information.
+//  Licensed under the MIT license.
 //
 
 #import <MSAL/MSAL.h>
@@ -38,7 +38,6 @@
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
 }
 
-
 // <HandleMsalResponseSnippet>
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
@@ -48,6 +47,5 @@
                                          sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
 }
 // </HandleMsalResponseSnippet>
-
 
 @end

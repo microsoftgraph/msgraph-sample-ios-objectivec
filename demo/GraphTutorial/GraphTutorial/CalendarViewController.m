@@ -3,20 +3,21 @@
 //  GraphTutorial
 //
 //  Copyright (c) Microsoft. All rights reserved.
-//  Licensed under the MIT license. See LICENSE.txt in the project root for license information.
+//  Licensed under the MIT license.
 //
 
-// <CalendarViewSnippet>
+// <CalendarViewControllerSnippet>
 #import "CalendarViewController.h"
+#import "CalendarTableViewController.h"
 #import "SpinnerViewController.h"
 #import "GraphManager.h"
-#import "CalendarTableViewCell.h"
+#import "GraphToIana.h"
 #import <MSGraphClientModels/MSGraphClientModels.h>
 
 @interface CalendarViewController ()
 
 @property SpinnerViewController* spinner;
-@property NSArray<MSGraphEvent*>* events;
+@property CalendarTableViewController* tableView;
 
 @end
 
@@ -26,14 +27,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 100;
-
     self.spinner = [SpinnerViewController alloc];
     [self.spinner startWithContainer:self];
+    
+    // Calculate the start and end of the current week
+    NSString* timeZoneId = [GraphToIana
+                            getIanaIdentifierFromGraphIdentifier:
+                            [GraphManager.instance graphTimeZone]];
+
+    NSDate* now = [NSDate date];
+    NSCalendar* calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:timeZoneId];
+    [calendar setTimeZone:timeZone];
+    
+    NSDateComponents* startOfWeekComponents = [calendar
+                                               components:NSCalendarUnitCalendar |
+                                               NSCalendarUnitYearForWeekOfYear |
+                                               NSCalendarUnitWeekOfYear
+                                               fromDate:now];
+    NSDate* startOfWeek = [startOfWeekComponents date];
+    NSDate* endOfWeek = [calendar dateByAddingUnit:NSCalendarUnitDay
+                                             value:7
+                                            toDate:startOfWeek
+                                           options:0];
+
+    // Convert start and end to ISO 8601 strings
+    NSISO8601DateFormatter* isoFormatter = [[NSISO8601DateFormatter alloc] init];
+    NSString* viewStart = [isoFormatter stringFromDate:startOfWeek];
+    NSString* viewEnd = [isoFormatter stringFromDate:endOfWeek];
 
     [GraphManager.instance
-     getEventsWithCompletionBlock:^(NSArray<MSGraphEvent*> * _Nullable events, NSError * _Nullable error) {
+     getCalendarViewStartingAt:viewStart
+     endingAt:viewEnd
+     withCompletionBlock:^(NSArray<MSGraphEvent*>* _Nullable events, NSError * _Nullable error) {
          dispatch_async(dispatch_get_main_queue(), ^{
              [self.spinner stop];
 
@@ -54,56 +80,22 @@
                  return;
              }
 
-             self.events = events;
-             [self.tableView reloadData];
+             [self.tableView setEvents:events];
          });
      }];
 }
 
-- (NSInteger) numberOfSections:(UITableView*) tableView {
-    return 1;
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Save a reference to the contained table view so
+    // we can pass the results of the Graph call to it
+    if ([segue.destinationViewController isKindOfClass:[CalendarTableViewController class]]) {
+        self.tableView = segue.destinationViewController;
+    }
 }
 
-- (NSInteger) tableView:(UITableView*) tableView numberOfRowsInSection:(NSInteger) section {
-    return self.events ? self.events.count : 0;
-}
-
-- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CalendarTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell"];
-
-    // Get the event that corresponds to the row
-    MSGraphEvent* event = self.events[indexPath.row];
-
-    // Configure the cell
-    cell.subject = event.subject;
-    cell.organizer = event.organizer.emailAddress.name;
-    cell.duration = [NSString stringWithFormat:@"%@ to %@",
-                     [self formatGraphDateTime:event.start],
-                     [self formatGraphDateTime:event.end]];
-
-    return cell;
-}
-
-- (NSString*) formatGraphDateTime:(MSGraphDateTimeTimeZone*) dateTime {
-    // Create a formatter to parse Graph's date format
-    NSDateFormatter* isoFormatter = [[NSDateFormatter alloc] init];
-    isoFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSSS";
-
-    NSLog(@"Parsing: %@ - %@", dateTime.dateTime, dateTime.timeZone);
-
-    // Specify the time zone
-    isoFormatter.timeZone = [[NSTimeZone alloc] initWithName:dateTime.timeZone];
-
-    NSDate* date = [isoFormatter dateFromString:dateTime.dateTime];
-
-    // Output like 5/5/2019, 2:00 PM
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateStyle = NSDateFormatterShortStyle;
-    dateFormatter.timeStyle = NSDateFormatterShortStyle;
-
-    NSString* dateString = [dateFormatter stringFromDate:date];
-    return dateString;
+- (IBAction) showNewEventForm {
+    [self performSegueWithIdentifier:@"showEventForm" sender:nil];
 }
 
 @end
-// </CalendarViewSnippet>
+// </CalendarViewControllerSnippet>

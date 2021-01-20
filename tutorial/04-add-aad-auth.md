@@ -8,7 +8,7 @@ In this exercise you will extend the application from the previous exercise to s
     | Key | Type | Value |
     |-----|------|-------|
     | `AppId` | String | The application ID from the Azure portal |
-    | `GraphScopes` | Array | Two String values: `User.Read` and `Calendars.Read` |
+    | `GraphScopes` | Array | Three String values: `User.Read`, `MailboxSettings.Read`, and `Calendars.ReadWrite` |
 
     ![A screenshot of the AuthSettings.plist file in Xcode](./images/auth-settings.png)
 
@@ -105,12 +105,13 @@ In this section you will create a helper class to hold all of the calls to Micro
 
     NS_ASSUME_NONNULL_BEGIN
 
-    typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user, NSError* _Nullable error);
+    typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user,
+                                         NSError* _Nullable error);
 
     @interface GraphManager : NSObject
 
     + (id) instance;
-    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock)completionBlock;
+    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock) completion;
 
     @end
 
@@ -150,9 +151,11 @@ In this section you will create a helper class to hold all of the calls to Micro
         return self;
     }
 
-    - (void) getMeWithCompletionBlock:(GetMeCompletionBlock)completionBlock {
+    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock) completion {
         // GET /me
-        NSString* meUrlString = [NSString stringWithFormat:@"%@/me", MSGraphBaseURL];
+        NSString* meUrlString = [NSString stringWithFormat:@"%@/me?%@",
+                                 MSGraphBaseURL,
+                                 @"$select=displayName,mail,mailboxSettings,userPrincipalName"];
         NSURL* meUrl = [[NSURL alloc] initWithString:meUrlString];
         NSMutableURLRequest* meRequest = [[NSMutableURLRequest alloc] initWithURL:meUrl];
 
@@ -162,7 +165,7 @@ In this section you will create a helper class to hold all of the calls to Micro
             client:self.graphClient
             completion:^(NSData *data, NSURLResponse *response, NSError *error) {
                 if (error) {
-                    completionBlock(nil, error);
+                    completion(nil, error);
                     return;
                 }
 
@@ -171,9 +174,9 @@ In this section you will create a helper class to hold all of the calls to Micro
                 MSGraphUser* user = [[MSGraphUser alloc] initWithData:data error:&graphError];
 
                 if (graphError) {
-                    completionBlock(nil, graphError);
+                    completion(nil, graphError);
                 } else {
-                    completionBlock(user, nil);
+                    completion(user, nil);
                 }
             }];
 

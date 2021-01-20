@@ -3,14 +3,14 @@
 //  GraphTutorial
 //
 //  Copyright (c) Microsoft. All rights reserved.
-//  Licensed under the MIT license. See LICENSE.txt in the project root for license information.
+//  Licensed under the MIT license.
 //
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CalendarViewController : UITableViewController
+@interface CalendarViewController : UIViewController
 
 @end
 

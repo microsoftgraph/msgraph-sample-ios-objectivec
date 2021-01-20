@@ -3,7 +3,7 @@
 //  GraphTutorial
 //
 //  Copyright (c) Microsoft. All rights reserved.
-//  Licensed under the MIT license. See LICENSE.txt in the project root for license information.
+//  Licensed under the MIT license.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,14 +14,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user, NSError* _Nullable error);
-typedef void (^GetEventsCompletionBlock)(NSArray<MSGraphEvent*>* _Nullable events, NSError* _Nullable error);
+typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user,
+                                     NSError* _Nullable error);
+typedef void (^GetCalendarViewCompletionBlock)(NSArray<MSGraphEvent*>* _Nullable events,
+                                               NSError* _Nullable error);
+typedef void (^CreateEventCompletionBlock)(MSGraphEvent* _Nullable event,
+                                           NSError* _Nullable error);
 
 @interface GraphManager : NSObject
 
+@property (nonatomic) NSString *graphTimeZone;
+
 + (id) instance;
-- (void) getMeWithCompletionBlock: (GetMeCompletionBlock)completionBlock;
-- (void) getEventsWithCompletionBlock: (GetEventsCompletionBlock)completionBlock;
+- (void) getMeWithCompletionBlock: (GetMeCompletionBlock) completion;
+- (void) getCalendarViewStartingAt: (NSString*) viewStart
+                          endingAt: (NSString*) viewEnd
+               withCompletionBlock: (GetCalendarViewCompletionBlock) completion;
+- (void) createEventWithSubject: (NSString*) subject
+                       andStart: (NSDate*) start
+                         andEnd: (NSDate*) end
+                   andAttendees: (NSArray<NSString*>* _Nullable) attendees
+                        andBody: (NSString* _Nullable) body
+             andCompletionBlock: (CreateEventCompletionBlock) completion;
 
 @end
 

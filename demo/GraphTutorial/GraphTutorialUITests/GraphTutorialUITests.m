@@ -2,8 +2,7 @@
 //  GraphTutorialUITests.m
 //  GraphTutorialUITests
 //
-//  Created by Jason Johnston on 4/6/20.
-//  Copyright © 2020 Jason Johnston. All rights reserved.
+//  Created by Jason Johnston on 1/19/21.
 //
 
 #import <XCTest/XCTest.h>
@@ -39,7 +38,7 @@
 - (void)testLaunchPerformance {
     if (@available(macOS 10.15, iOS 13.0, tvOS 13.0, *)) {
         // This measures how long it takes to launch your application.
-        [self measureWithMetrics:@[XCTOSSignpostMetric.applicationLaunchMetric] block:^{
+        [self measureWithMetrics:@[[[XCTApplicationLaunchMetric alloc] init]] block:^{
             [[[XCUIApplication alloc] init] launch];
         }];
     }
