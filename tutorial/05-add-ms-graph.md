@@ -9,19 +9,24 @@ In this section you will extend the `GraphManager` class to add a function to ge
 1. Open **GraphManager.h** and add the following code above the `@interface` declaration.
 
     ```objc
-    typedef void (^GetCalendarViewCompletionBlock)(NSData* _Nullable data, NSError* _Nullable error);
+    typedef void (^GetCalendarViewCompletionBlock)(NSData* _Nullable data,
+                                                   NSError* _Nullable error);
     ```
 
 1. Add the following code to the `@interface` declaration.
 
     ```objc
-    - (void) getCalendarViewStartingAt: (NSString*)viewStart endingAt:(NSString*) viewEnd withCompletionBlock:(GetCalendarViewCompletionBlock)completion;
+    - (void) getCalendarViewStartingAt: (NSString*) viewStart
+                              endingAt: (NSString*) viewEnd
+                   withCompletionBlock: (GetCalendarViewCompletionBlock) completion;
     ```
 
 1. Open **GraphManager.m** and add the following function to the `GraphManager` class.
 
     ```objc
-    - (void) getCalendarViewStartingAt:(NSString *)viewStart endingAt:(NSString *)viewEnd withCompletionBlock:(GetCalendarViewCompletionBlock)completion {
+    - (void) getCalendarViewStartingAt: (NSString *) viewStart
+                              endingAt: (NSString *) viewEnd
+                   withCompletionBlock: (GetCalendarViewCompletionBlock) completion {
         // Set calendar view start and end parameters
         NSString* viewStartEndString =
         [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",
@@ -115,16 +120,25 @@ In this section you will extend the `GraphManager` class to add a function to ge
         [self.spinner startWithContainer:self];
 
         // Calculate the start and end of the current week
-        NSString* timeZoneId = [GraphToIana getIanaIdentifierFromGraphIdentifier:[GraphManager.instance graphTimeZone]];
+        NSString* timeZoneId = [GraphToIana
+                                getIanaIdentifierFromGraphIdentifier:
+                                [GraphManager.instance graphTimeZone]];
 
         NSDate* now = [NSDate date];
         NSCalendar* calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
         NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:timeZoneId];
         [calendar setTimeZone:timeZone];
 
-        NSDateComponents* startOfWeekComponents = [calendar components:NSCalendarUnitCalendar | NSCalendarUnitYearForWeekOfYear | NSCalendarUnitWeekOfYear fromDate:now];
+        NSDateComponents* startOfWeekComponents = [calendar
+                                                   components:NSCalendarUnitCalendar |
+                                                   NSCalendarUnitYearForWeekOfYear |
+                                                   NSCalendarUnitWeekOfYear
+                                                   fromDate:now];
         NSDate* startOfWeek = [startOfWeekComponents date];
-        NSDate* endOfWeek = [calendar dateByAddingUnit:NSCalendarUnitDay value:7 toDate:startOfWeek options:0];
+        NSDate* endOfWeek = [calendar dateByAddingUnit:NSCalendarUnitDay
+                                                 value:7
+                                                toDate:startOfWeek
+                                               options:0];
 
         // Convert start and end to ISO 8601 strings
         NSISO8601DateFormatter* isoFormatter = [[NSISO8601DateFormatter alloc] init];
@@ -132,7 +146,9 @@ In this section you will extend the `GraphManager` class to add a function to ge
         NSString* viewEnd = [isoFormatter stringFromDate:endOfWeek];
 
         [GraphManager.instance
-         getCalendarViewStartingAt:viewStart endingAt:viewEnd withCompletionBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+         getCalendarViewStartingAt:viewStart
+         endingAt:viewEnd
+         withCompletionBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  [self.spinner stop];
 

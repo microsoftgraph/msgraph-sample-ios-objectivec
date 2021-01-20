@@ -53,8 +53,6 @@
     NSDateFormatter* isoFormatter = [[NSDateFormatter alloc] init];
     isoFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSSS";
 
-    NSLog(@"Parsing: %@ - %@", dateTime.dateTime, dateTime.timeZone);
-
     // Specify the time zone
     isoFormatter.timeZone = [[NSTimeZone alloc] initWithName:dateTime.timeZone];
 

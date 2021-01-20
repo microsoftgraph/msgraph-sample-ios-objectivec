@@ -14,16 +14,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user, NSError* _Nullable error);
-typedef void (^GetCalendarViewCompletionBlock)(NSArray<MSGraphEvent*>* _Nullable events, NSError* _Nullable error);
+typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user,
+                                     NSError* _Nullable error);
+typedef void (^GetCalendarViewCompletionBlock)(NSArray<MSGraphEvent*>* _Nullable events,
+                                               NSError* _Nullable error);
+typedef void (^CreateEventCompletionBlock)(MSGraphEvent* _Nullable event,
+                                           NSError* _Nullable error);
 
 @interface GraphManager : NSObject
 
 @property (nonatomic) NSString *graphTimeZone;
 
 + (id) instance;
-- (void) getMeWithCompletionBlock: (GetMeCompletionBlock)completion;
-- (void) getCalendarViewStartingAt: (NSString*)viewStart endingAt:(NSString*) viewEnd withCompletionBlock:(GetCalendarViewCompletionBlock)completion;
+- (void) getMeWithCompletionBlock: (GetMeCompletionBlock) completion;
+- (void) getCalendarViewStartingAt: (NSString*) viewStart
+                          endingAt: (NSString*) viewEnd
+               withCompletionBlock: (GetCalendarViewCompletionBlock) completion;
 
 @end
 

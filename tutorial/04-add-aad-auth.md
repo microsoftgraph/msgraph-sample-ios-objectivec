@@ -105,12 +105,13 @@ In this section you will create a helper class to hold all of the calls to Micro
 
     NS_ASSUME_NONNULL_BEGIN
 
-    typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user, NSError* _Nullable error);
+    typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user,
+                                         NSError* _Nullable error);
 
     @interface GraphManager : NSObject
 
     + (id) instance;
-    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock)completion;
+    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock) completion;
 
     @end
 
@@ -150,7 +151,7 @@ In this section you will create a helper class to hold all of the calls to Micro
         return self;
     }
 
-    - (void) getMeWithCompletionBlock:(GetMeCompletionBlock)completion {
+    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock) completion {
         // GET /me
         NSString* meUrlString = [NSString stringWithFormat:@"%@/me?%@",
                                  MSGraphBaseURL,

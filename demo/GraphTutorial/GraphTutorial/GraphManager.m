@@ -36,7 +36,7 @@
     return self;
 }
 
-- (void) getMeWithCompletionBlock:(GetMeCompletionBlock)completion {
+- (void) getMeWithCompletionBlock: (GetMeCompletionBlock) completion {
     // GET /me
     NSString* meUrlString = [NSString stringWithFormat:@"%@/me?%@",
                              MSGraphBaseURL,
@@ -70,7 +70,9 @@
 }
 
 // <GetCalendarViewSnippet>
-- (void) getCalendarViewStartingAt:(NSString *)viewStart endingAt:(NSString *)viewEnd withCompletionBlock:(GetCalendarViewCompletionBlock)completion {
+- (void) getCalendarViewStartingAt: (NSString *) viewStart
+                          endingAt: (NSString *) viewEnd
+               withCompletionBlock: (GetCalendarViewCompletionBlock) completion {
     // Set calendar view start and end parameters
     NSString* viewStartEndString =
     [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",

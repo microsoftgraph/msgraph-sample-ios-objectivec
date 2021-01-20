@@ -31,16 +31,25 @@
     [self.spinner startWithContainer:self];
     
     // Calculate the start and end of the current week
-    NSString* timeZoneId = [GraphToIana getIanaIdentifierFromGraphIdentifier:[GraphManager.instance graphTimeZone]];
+    NSString* timeZoneId = [GraphToIana
+                            getIanaIdentifierFromGraphIdentifier:
+                            [GraphManager.instance graphTimeZone]];
 
     NSDate* now = [NSDate date];
     NSCalendar* calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:timeZoneId];
     [calendar setTimeZone:timeZone];
     
-    NSDateComponents* startOfWeekComponents = [calendar components:NSCalendarUnitCalendar | NSCalendarUnitYearForWeekOfYear | NSCalendarUnitWeekOfYear fromDate:now];
+    NSDateComponents* startOfWeekComponents = [calendar
+                                               components:NSCalendarUnitCalendar |
+                                               NSCalendarUnitYearForWeekOfYear |
+                                               NSCalendarUnitWeekOfYear
+                                               fromDate:now];
     NSDate* startOfWeek = [startOfWeekComponents date];
-    NSDate* endOfWeek = [calendar dateByAddingUnit:NSCalendarUnitDay value:7 toDate:startOfWeek options:0];
+    NSDate* endOfWeek = [calendar dateByAddingUnit:NSCalendarUnitDay
+                                             value:7
+                                            toDate:startOfWeek
+                                           options:0];
 
     // Convert start and end to ISO 8601 strings
     NSISO8601DateFormatter* isoFormatter = [[NSISO8601DateFormatter alloc] init];
@@ -48,7 +57,9 @@
     NSString* viewEnd = [isoFormatter stringFromDate:endOfWeek];
 
     [GraphManager.instance
-     getCalendarViewStartingAt:viewStart endingAt:viewEnd withCompletionBlock:^(NSArray<MSGraphEvent*>* _Nullable events, NSError * _Nullable error) {
+     getCalendarViewStartingAt:viewStart
+     endingAt:viewEnd
+     withCompletionBlock:^(NSArray<MSGraphEvent*>* _Nullable events, NSError * _Nullable error) {
          dispatch_async(dispatch_get_main_queue(), ^{
              [self.spinner stop];
 
