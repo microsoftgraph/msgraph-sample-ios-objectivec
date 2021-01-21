@@ -185,7 +185,7 @@ In this section you will extend the `GraphManager` class to add a function to ge
 
 Now you can replace the JSON dump with something to display the results in a user-friendly manner. In this section, you will modify the `getCalendarViewStartingAt` function to return strongly-typed objects, and modify `CalendarViewController` to use a table view to render the events.
 
-### Update getEvents
+### Update getCalendarViewStartingAt
 
 1. Open **GraphManager.h**. Change the `GetCalendarViewCompletionBlock` type definition to the following.
 
@@ -195,7 +195,7 @@ Now you can replace the JSON dump with something to display the results in a use
 
 1. Open **GraphManager.m**. Replace the existing `getCalendarViewStartingAt` function with the following code.
 
-    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/GraphManager.m" id="GetCalendarViewSnippet" highlight="40-59":::
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/GraphManager.m" id="GetCalendarViewSnippet" highlight="42-61":::
 
 ### Update CalendarViewController
 
