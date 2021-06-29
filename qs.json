@@ -1,7 +1,7 @@
 {
-  "sourceDirectory": ".\\demo",
-  "exampleConfigFile": ".\\GraphTutorial\\GraphTutorial\\AuthSettings.plist.example",
+  "sourceDirectory": "./demo",
+  "exampleConfigFile": "./GraphTutorial/GraphTutorial/AuthSettings.example.plist",
   "configFile": "AuthSettings.plist",
   "archiveFile": "ObjectiveCQuickStart.zip",
-  "zipReadMe": ".\\README.md"
+  "zipReadMe": "./README.md"
 }
